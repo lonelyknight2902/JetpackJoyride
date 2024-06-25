@@ -10,7 +10,7 @@ class Jetpack extends Phaser.GameObjects.Sprite {
         this.anims.create({
             key: 'jetpack-ascend-fire',
             frames: this.anims.generateFrameNumbers('jetpack', { frames: [4, 5, 6, 7] }),
-            frameRate: 10,
+            frameRate: 12,
             repeat: -1,
         })
         this.anims.create({
