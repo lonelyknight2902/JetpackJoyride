@@ -12,6 +12,7 @@ class DescendState extends State {
     enter(): void {
         this._player.playerBody.anims.play('player-descend')
         this._player.playerHead.anims.play('player-descend')
+        this._player.jetpack.anims.play('jetpack-descend')
         // this._player.body?.velocity.x = 0
     }
 
@@ -24,7 +25,8 @@ class DescendState extends State {
             console.log('Player is ascending')
             this.stateMachine.transition('player-ascend')
         }
-        if (this._player.playerBody.body?.touching.down) {
+        const body = this._player.body as Phaser.Physics.Arcade.Body
+        if (body?.touching.down) {
             console.log('Player is touching down')
             this.stateMachine.transition('player-touchdown')
         }

@@ -1,4 +1,4 @@
-class PlayerHead extends Phaser.Physics.Arcade.Sprite {
+class PlayerHead extends Phaser.GameObjects.Sprite{
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string) {
         super(scene, x, y, texture)
         this.anims.create({

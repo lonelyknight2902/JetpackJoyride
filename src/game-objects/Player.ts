@@ -6,6 +6,7 @@ import {
     RunState,
     TouchDownState,
 } from '../states/player-states'
+import Jetpack from './Jetpack'
 import PlayerBody from './PlayerBody'
 import PlayerHead from './PlayerHead'
 
@@ -13,19 +14,29 @@ class Player extends Phaser.GameObjects.Container {
     private _stateMachine: StateMachine
     private _playerBody: PlayerBody
     private _playerHead: PlayerHead
+    private _jetpack: Jetpack
     private _scene: Phaser.Scene
+    // private _renderTexture: Phaser.GameObjects.RenderTexture
+    // private _container: Phaser.GameObjects.Container
     constructor(scene: Phaser.Scene, x: number, y: number) {
+        // texture: string, renderTexture: Phaser.GameObjects.RenderTexture
         super(scene, x, y)
+        // this.setSize(16, 32)
         this._scene = scene
-        this.setSize(32, 44)
-        this._playerBody = new PlayerBody(scene, 0, 12, 'player-body')
-        this._playerHead = new PlayerHead(scene, 0, 0, 'player-head')
+        this._playerBody = new PlayerBody(scene, 16, 22, 'player-body')
+        this._playerHead = new PlayerHead(scene, 16, 10, 'player-head')
+        this._jetpack = new Jetpack(scene, 4, 19, 'jetpack')
         this.add(this._playerBody)
         this.add(this._playerHead)
-        scene.physics.add.existing(this._playerBody)
-        scene.physics.add.existing(this._playerHead)
+        this.add(this._jetpack)
+        // this._container = new Phaser.GameObjects.Container(scene, x, y, [this._playerBody, this._playerHead])
+        // let body = this._container.body as Phaser.Physics.Arcade.Body
+        // this._container.setSize(32, 64)
+        // this._renderTexture = renderTexture
+        // scene.physics.add.existing(this._playerBody)
+        // scene.physics.add.existing(this._playerHead)
         // scene.physics.world.enable(this)
-        // scene.physics.world.enableBody(this, Phaser.Physics.Arcade.DYNAMIC_BODY)
+        // this.body = this._playerBody.body
         this._stateMachine = new StateMachine('player-run', {
             'player-run': new RunState(this, scene),
             'player-ascend': new AscendState(this, scene),
@@ -34,12 +45,20 @@ class Player extends Phaser.GameObjects.Container {
             'player-die': new DieState(this, scene),
         })
         scene.add.existing(this)
-        // scene.physics.add.existing(this)
+        // this.setBodySize(16, 32)
+        scene.physics.add.existing(this)
+        const body = this.body as Phaser.Physics.Arcade.Body
+        body?.setSize(28, 34)
+        body.setCollideWorldBounds(true)
     }
 
     update(): void {
-        this._playerHead.y = this.playerBody.y - 12
-        this._playerHead.x = this.playerBody.x
+        // this._playerHead.y = this.playerBody.y - 12
+        // this.y = this.playerBody.parentContainer.y + this.playerBody.y - 12
+        console.log(this.playerBody.y)
+        // this.updatePlayerTexture()
+        // this.x = this._playerBody.x
+        // this.y = this._playerBody.y
         this._stateMachine.update()
         // this.x = this._playerHead.x
         // this.y = this._playerHead.y
@@ -53,7 +72,15 @@ class Player extends Phaser.GameObjects.Container {
         return this._playerHead
     }
 
-    // updatePlayerTextture
+    get jetpack(): Jetpack {
+        return this._jetpack
+    }
+
+    // updatePlayerTexture() {
+    //     this._renderTexture.clear()
+    //     this._renderTexture.draw(this._container, 0, 16)
+    //     this._renderTexture.setSize(32, 44)
+    // }
 }
 
 export default Player

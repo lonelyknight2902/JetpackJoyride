@@ -12,6 +12,9 @@ class RunState extends State {
     enter(): void {
         this._player.playerBody.anims.play('player-run')
         this._player.playerHead.anims.play('player-run')
+        this._player.jetpack.anims.play('jetpack-run')
+        const body = this._player.body as Phaser.Physics.Arcade.Body
+        body?.setSize(28, 34)
     }
 
     exit(): void {
@@ -23,7 +26,6 @@ class RunState extends State {
             console.log('Player is ascending')
             this.stateMachine.transition('player-ascend')
         }
-        this._player.playerHead.y = this._player.playerBody.y - 12
     }
 }
 

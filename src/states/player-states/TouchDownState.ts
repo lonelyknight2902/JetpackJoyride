@@ -11,6 +11,10 @@ class TouchDownState extends State {
     }
     enter(): void {
         this._player.playerBody.anims.play('player-touchdown')
+        this._player.playerHead.anims.play('player-touchdown')
+        this._player.jetpack.anims.play('jetpack-touchdown')
+        const body = this._player.body as Phaser.Physics.Arcade.Body
+        body?.setSize(28, 34)
     }
 
     exit(): void {
