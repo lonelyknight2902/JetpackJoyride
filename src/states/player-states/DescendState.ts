@@ -26,7 +26,7 @@ class DescendState extends State {
             this.stateMachine.transition('player-ascend')
         }
         const body = this._player.body as Phaser.Physics.Arcade.Body
-        if (body?.touching.down) {
+        if (body?.blocked.down) {
             console.log('Player is touching down')
             this.stateMachine.transition('player-touchdown')
         }
