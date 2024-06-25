@@ -11,6 +11,8 @@ class DieState extends State {
     }
     enter(): void {
         this._player.playerBody.anims.play('player-die')
+        this._player.playerHead.anims.play('player-die')
+        this._player.jetpack.setVisible(false)
     }
 
     exit(): void {

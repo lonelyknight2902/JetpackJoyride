@@ -16,7 +16,7 @@ class Player extends Phaser.GameObjects.Container {
     private _playerBody: PlayerBody
     private _playerHead: PlayerHead
     private _jetpack: Jetpack
-    private _bulletFlash:  BulletFlash
+    private _bulletFlash: BulletFlash
     private _scene: Phaser.Scene
     // private _renderTexture: Phaser.GameObjects.RenderTexture
     // private _container: Phaser.GameObjects.Container
@@ -43,7 +43,7 @@ class Player extends Phaser.GameObjects.Container {
         // scene.physics.add.existing(this._playerHead)
         // scene.physics.world.enable(this)
         // this.body = this._playerBody.body
-        this._stateMachine = new StateMachine('player-run', {
+        this._stateMachine = new StateMachine('player-descend', {
             'player-run': new RunState(this, scene),
             'player-ascend': new AscendState(this, scene),
             'player-descend': new DescendState(this, scene),
@@ -70,7 +70,7 @@ class Player extends Phaser.GameObjects.Container {
         // this.y = this._playerHead.y
     }
 
-    get playerBody(): PlayerBody{
+    get playerBody(): PlayerBody {
         return this._playerBody
     }
 
