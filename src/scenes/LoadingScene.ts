@@ -16,7 +16,7 @@ class LoadingScene extends Phaser.Scene {
             text: 'Loading...',
             style: {
                 font: '20px monospace',
-            }
+            },
         })
         loadingText.setOrigin(0.5, 0.5)
 
@@ -26,7 +26,7 @@ class LoadingScene extends Phaser.Scene {
             text: '0%',
             style: {
                 font: '18px monospace',
-            }
+            },
         })
 
         percentText.setOrigin(0.5, 0.5)
@@ -37,7 +37,7 @@ class LoadingScene extends Phaser.Scene {
             text: '',
             style: {
                 font: '18px monospace',
-            }
+            },
         })
 
         assetText.setOrigin(0.5, 0.5)
@@ -66,6 +66,20 @@ class LoadingScene extends Phaser.Scene {
         this.load.image('titleBackground2', 'assets/Levels/Title/titleFG_2_TVOS.png')
         this.load.image('hallway1', 'assets/Levels/Hallway1/hallway1FG_1_TVOS.png')
         this.load.image('hallway2', 'assets/Levels/Hallway1/hallway1FG_2_TVOS.png')
+
+        this.load.image('coin', 'assets/Entities/coin1_TVOS.png')
+        this.load.tilemapTiledJSON('arrowCoinMap', 'assets/arrow-coin.json')
+
+        this.load.image('alarmLight', 'assets/Levels/Title/alarmLight_TVOS.png')
+        this.load.image('bestScreen', 'assets/Levels/Title/bestScreen_TVOS.png')
+        this.load.image('doNotTouchSign', 'assets/Levels/Title/doNotTouchSign_TVOS.png')
+        this.load.image('gramophone', 'assets/Levels/Title/gramophone_TVOS.png')
+        this.load.image('lightEffect', 'assets/Levels/Title/lightEffect_TVOS.png')
+        this.load.image('lightEffect2', 'assets/Levels/Title/lightEffect2_TVOS.png')
+        this.load.image('table', 'assets/Levels/Title/table_TVOS.png')
+        this.load.image('titleLight', 'assets/Levels/Title/title_light_TVOS.png')
+        this.load.image('jetpackStand', 'assets/Levels/Title/Objects/JetpackStand.png')
+        this.load.tilemapTiledJSON('titleMap', 'assets/title.json')
 
         this.load.spritesheet('bullet-flash', 'assets/Characters/Effects/bulletFlash_TVOS.png', {
             frameWidth: 64,
