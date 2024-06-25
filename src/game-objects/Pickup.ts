@@ -1,4 +1,4 @@
-class Pickup extends Phaser.GameObjects.Sprite {
+class Pickup extends Phaser.Physics.Arcade.Sprite {
     constructor(scene: Phaser.Scene, x: number, y: number) {
         super(scene, x, y, 'pickup')
         this.anims.create({
@@ -7,8 +7,10 @@ class Pickup extends Phaser.GameObjects.Sprite {
             frameRate: 10,
             repeat: -1,
         })
+        // this.
         this.anims.play('pickup')
         scene.add.existing(this)
+        scene.physics.add.existing(this)
     }
 }
 
