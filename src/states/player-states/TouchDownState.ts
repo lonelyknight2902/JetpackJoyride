@@ -25,6 +25,9 @@ class TouchDownState extends State {
         if (this._player.playerBody.anims.getProgress() === 1) {
             console.log('Player is running')
             this.stateMachine.transition('player-run')
+        } else if (this._scene.input.keyboard?.createCursorKeys().space?.isDown) {
+            console.log('Player is ascending')
+            this.stateMachine.transition('player-ascend')
         }
         return
     }
