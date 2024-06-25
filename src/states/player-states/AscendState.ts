@@ -1,3 +1,4 @@
+import { ASCEND_SPEED } from '../../constants'
 import { Player } from '../../game-objects'
 import State from '../../types/State'
 
@@ -13,11 +14,13 @@ class AscendState extends State {
         this._player.playerBody.anims.play('player-ascend')
         this._player.playerHead.anims.play('player-ascend')
         this._player.jetpack.anims.play('jetpack-ascend-fire')
+        this._player.bulletFlash.setVisible(true)
+        this._player.bulletFlash.anims.play('bullet-flash')
         // this._player.setVelocityY(-200)
         // this._player.playerBody.setVelocityY(-200)
         // this._player.playerHead.setVelocityY(-200)
         const body = this._player.body as Phaser.Physics.Arcade.Body
-        body.setVelocityY(-200)
+        body.setVelocityY(-ASCEND_SPEED)
         body.setSize(24, 36)
     }
 
@@ -35,10 +38,13 @@ class AscendState extends State {
             // this._player.playerHead.setVelocityY(-200)
             if (this._player.jetpack.anims.getName() !== 'jetpack-ascend-fire') {
                 this._player.jetpack.anims.play('jetpack-ascend-fire')
+                this._player.bulletFlash.setVisible(true)
+                this._player.bulletFlash.anims.play('bullet-flash')
             }
             const body = this._player.body as Phaser.Physics.Arcade.Body
-            body.setVelocityY(-200)
+            body.setVelocityY(-ASCEND_SPEED)
         } else {
+            this._player.bulletFlash.setVisible(false)
             this._player.jetpack.anims.play('jetpack-ascend')
         }
     }
