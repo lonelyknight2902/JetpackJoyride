@@ -1,0 +1,33 @@
+import State from '../types/State'
+
+class StateMachine {
+    private _initialState: string
+    private _state: string | null
+    private _possibleStates: { [state: string]: State } = {}
+    private _stateArgs: any[]
+
+    constructor(initialState: string, possibleStates: { [state: string]: State }, stateArgs: any[] = []) {
+        this._initialState = initialState
+        this._possibleStates = possibleStates
+        this._state = null
+        this._stateArgs = stateArgs
+        for (const state in this._possibleStates) {
+            this._possibleStates[state].stateMachine = this
+        }
+    }
+
+    public update() {
+        if (this._state === null) {
+            this._state = this._initialState
+            this._possibleStates[this._state].enter()
+        }
+        this._possibleStates[this._state].execute()
+    }
+
+    public transition(stateKey: string): void {
+        this._state = stateKey
+        this._possibleStates[this._state].enter()
+    }
+}
+
+export default StateMachine
