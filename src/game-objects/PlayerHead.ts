@@ -11,7 +11,7 @@ class PlayerHead extends Phaser.GameObjects.Sprite{
             key: 'player-ascend',
             frames: this.anims.generateFrameNumbers('player-head', { frames: [4, 5, 6, 7] }),
             frameRate: 10,
-            repeat: 0,
+            repeat: -1,
         })
         this.anims.create({
             key: 'player-descend',
