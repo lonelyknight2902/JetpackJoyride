@@ -17,6 +17,7 @@ class Player extends Phaser.GameObjects.Container {
     private _playerHead: PlayerHead
     private _jetpack: Jetpack
     private _bulletFlash: BulletFlash
+    private bullet: Phaser.GameObjects.Particles.ParticleEmitter
     private _scene: Phaser.Scene
     // private _renderTexture: Phaser.GameObjects.RenderTexture
     // private _container: Phaser.GameObjects.Container
@@ -30,10 +31,34 @@ class Player extends Phaser.GameObjects.Container {
         this._jetpack = new Jetpack(scene, 4, 19, 'jetpack')
         this._bulletFlash = new BulletFlash(scene, 4, 45, 'bullet-flash')
         this._bulletFlash.setScale(0.4)
+        const dist = new Phaser.Math.Vector2()
+        const force = new Phaser.Math.Vector2()
+        // let well = {
+        //     x: 512,
+        //     y: 384,
+        //     active: true,
+        //     update: function (p) {
+        //         dist.copy(this).subtract(p)
+
+        //         const len = dist.length()
+        //         p.accelerationX = force.x
+        //         p.accelerationY = force.y
+        //     },
+        // }
+        this.bullet = scene.add.particles(4, 45, 'bullet', {
+            speed: 20,
+            lifespan: 5000,
+            gravityY: 3000,
+            rotate: 90,
+        })
+        // this.bullet.createGravityWell(well)
+        this.bullet.stop()
         this.add(this._playerBody)
         this.add(this._playerHead)
         this.add(this._jetpack)
         this.add(this._bulletFlash)
+        this.add(this.bullet)
+        this.sendToBack(this.bullet)
         this._bulletFlash.setVisible(false)
         // this._container = new Phaser.GameObjects.Container(scene, x, y, [this._playerBody, this._playerHead])
         // let body = this._container.body as Phaser.Physics.Arcade.Body
@@ -53,6 +78,7 @@ class Player extends Phaser.GameObjects.Container {
         scene.add.existing(this)
         // this.setBodySize(16, 32)
         scene.physics.add.existing(this)
+        // scene.physics.add.existing(this.bullet)
         const body = this.body as Phaser.Physics.Arcade.Body
         body?.setSize(28, 34)
         body.setCollideWorldBounds(true)
@@ -84,6 +110,10 @@ class Player extends Phaser.GameObjects.Container {
 
     get bulletFlash(): BulletFlash {
         return this._bulletFlash
+    }
+
+    public getBullet(): Phaser.GameObjects.Particles.ParticleEmitter {
+        return this.bullet
     }
 
     // updatePlayerTexture() {
