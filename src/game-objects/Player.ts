@@ -46,7 +46,7 @@ class Player extends Phaser.GameObjects.Container {
         //     },
         // }
         this.bullet = scene.add.particles(4, 45, 'bullet', {
-            speed: 20,
+            speed: 10,
             lifespan: 5000,
             gravityY: 3000,
             rotate: 90,
