@@ -16,6 +16,8 @@ class AscendState extends State {
         this._player.jetpack.anims.play('jetpack-ascend-fire')
         this._player.bulletFlash.setVisible(true)
         this._player.bulletFlash.anims.play('bullet-flash')
+        // this._player.getBullet().setAngle(Math.random() * 30 - 15)
+        this._player.getBullet().start()
         // this._player.setVelocityY(-200)
         // this._player.playerBody.setVelocityY(-200)
         // this._player.playerHead.setVelocityY(-200)
@@ -36,16 +38,19 @@ class AscendState extends State {
             // this._player.setVelocityY(-200)
             // this._player.playerBody.setVelocityY(-200)
             // this._player.playerHead.setVelocityY(-200)
+            // this._player.getBullet().setAngle(Math.random() * 30 - 15)
             if (this._player.jetpack.anims.getName() !== 'jetpack-ascend-fire') {
                 this._player.jetpack.anims.play('jetpack-ascend-fire')
                 this._player.bulletFlash.setVisible(true)
                 this._player.bulletFlash.anims.play('bullet-flash')
+                this._player.getBullet().start()
             }
             const body = this._player.body as Phaser.Physics.Arcade.Body
             body.setVelocityY(-ASCEND_SPEED)
         } else {
             this._player.bulletFlash.setVisible(false)
             this._player.jetpack.anims.play('jetpack-ascend')
+            this._player.getBullet().stop()
         }
     }
 }
