@@ -73,13 +73,22 @@ class LoadingScene extends Phaser.Scene {
         this.load.image('alarmLight', 'assets/Levels/Title/alarmLight_TVOS.png')
         this.load.image('bestScreen', 'assets/Levels/Title/bestScreen_TVOS.png')
         this.load.image('doNotTouchSign', 'assets/Levels/Title/doNotTouchSign_TVOS.png')
-        this.load.image('gramophone', 'assets/Levels/Title/gramophone_TVOS.png')
-        this.load.image('lightEffect', 'assets/Levels/Title/lightEffect_TVOS.png')
-        this.load.image('lightEffect2', 'assets/Levels/Title/lightEffect2_TVOS.png')
-        this.load.image('table', 'assets/Levels/Title/table_TVOS.png')
+        // this.load.image('gramophone', 'assets/Levels/Title/gramophone_TVOS.png')
+        this.load.image('lightEffect', 'assets/Levels/Title/lightEffect.png')
+        this.load.image('lightEffect2', 'assets/Levels/Title/lightEffect2.png')
+        this.load.image('table', 'assets/Levels/Title/table.png')
         this.load.image('titleLight', 'assets/Levels/Title/title_light_TVOS.png')
         this.load.image('jetpackStand', 'assets/Levels/Title/Objects/JetpackStand.png')
-        this.load.tilemapTiledJSON('titleMap', 'assets/title.json')
+        this.load.tilemapTiledJSON('titleMap', 'assets/titleMapBG.json')
+
+        this.load.image('sectorNumbers', 'assets/Levels/Hallway1/sectorNumbers_TVOS.png')
+        this.load.image('sectorLight', 'assets/Levels/Hallway1/sectorLight.png')
+        this.load.image('hallwayAssets', 'assets/atlas/hallway_assets.png')
+        this.load.tilemapTiledJSON('hallwayMap', 'assets/hallway.json')
+
+        this.load.atlas('hallway', 'assets/atlas/hallway_assets.png', 'assets/atlas/hallway_assets.json')
+
+        this.load.image('bullet', 'assets/Characters/Effects/effect_smgbullet.png')
 
         this.load.spritesheet('bullet-flash', 'assets/Characters/Effects/bulletFlash_TVOS.png', {
             frameWidth: 64,
@@ -102,6 +111,13 @@ class LoadingScene extends Phaser.Scene {
             frameWidth: 128,
             frameHeight: 128,
         })
+
+        this.load.spritesheet('gramophone', 'assets/Levels/Title/gramophone_TVOS.png', {
+            frameWidth: 64,
+            frameHeight: 128,
+        })
+
+
     }
 
     create() {
