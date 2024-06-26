@@ -1,8 +1,9 @@
+import { PlayScene } from '../../scenes'
 import State from '../../types/State'
 
 class PauseState extends State {
-    private scene: Phaser.Scene
-    constructor(scene: Phaser.Scene) {
+    private scene: PlayScene
+    constructor(scene: PlayScene) {
         super()
         this.scene = scene
     }

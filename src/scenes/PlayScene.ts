@@ -98,26 +98,27 @@ class PlayScene extends Phaser.Scene {
     }
 
     update(time: number, delta: number) {
-        this._player.update()
-        this.map.each((map: Phaser.GameObjects.Container) => {
-            if (map.x + map.width < 0) {
-                this.map.remove(map)
-                this.mapList.shift()
-                if (!(map instanceof TitleMap)) {
-                    // this.readyMap.push(map)
-                    console.log(this.mapList)
-                    map.x =
-                        this.mapList[this.mapList.length - 1].x +
-                        this.mapList[this.mapList.length - 1].width -
-                        6 * 32
-                    this.mapList.push(map)
-                    this.map.add(map)
-                    this.map.sendToBack(map)
-                }
-            }
-            map.x -= (500 * delta) / 1000
-            map.update()
-        })
+        this.stateMachine.update(time, delta)
+        // this._player.update(time, delta)
+        // this.map.each((map: Phaser.GameObjects.Container) => {
+        //     if (map.x + map.width < 0) {
+        //         this.map.remove(map)
+        //         this.mapList.shift()
+        //         if (!(map instanceof TitleMap)) {
+        //             // this.readyMap.push(map)
+        //             console.log(this.mapList)
+        //             map.x =
+        //                 this.mapList[this.mapList.length - 1].x +
+        //                 this.mapList[this.mapList.length - 1].width -
+        //                 6 * 32
+        //             this.mapList.push(map)
+        //             this.map.add(map)
+        //             this.map.sendToBack(map)
+        //         }
+        //     }
+        //     map.x -= (500 * delta) / 1000
+        //     map.update()
+        // })
 
         // this._player.getBullet().forEachAlive((bullet) => {
         //     const particleBound = bullet.getBounds()
@@ -128,9 +129,21 @@ class PlayScene extends Phaser.Scene {
         //         bullet.kill()
         //     }
         // }, this)
-        if (this.backgroundLayer) {
-            this.backgroundLayer.x -= 0.5
-        }
+        // if (this.backgroundLayer) {
+        //     this.backgroundLayer.x -= 0.5
+        // }
+    }
+
+    public getPlayer(): Player {
+        return this._player
+    }
+
+    public getMap(): Phaser.GameObjects.Container {
+        return this.map
+    }
+
+    public getMapList(): Phaser.GameObjects.Container[] {
+        return this.mapList
     }
 
     loadTileMap() {

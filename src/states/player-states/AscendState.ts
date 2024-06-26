@@ -30,7 +30,7 @@ class AscendState extends State {
         return
     }
 
-    execute(): void {
+    execute(time: number, delta: number): void {
         if (this._player.body && this._player.body.velocity.y > 0) {
             console.log('Player is descending')
             this.stateMachine.transition('player-descend')

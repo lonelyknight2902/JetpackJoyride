@@ -19,7 +19,7 @@ class DieState extends State {
         return
     }
 
-    execute(): void {
+    execute(time: number, delta: number): void {
         return
     }
 }

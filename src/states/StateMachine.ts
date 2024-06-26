@@ -16,12 +16,12 @@ class StateMachine {
         }
     }
 
-    public update() {
+    public update(time: number, delta: number) {
         if (this._state === null) {
             this._state = this._initialState
             this._possibleStates[this._state].enter()
         }
-        this._possibleStates[this._state].execute()
+        this._possibleStates[this._state].execute(time, delta)
     }
 
     public transition(stateKey: string): void {

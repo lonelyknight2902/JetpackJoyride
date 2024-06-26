@@ -1,10 +1,10 @@
 import { StateMachine } from '../states'
 
-class State {
+abstract class State {
     public stateMachine: StateMachine
-    enter(): void {}
-    exit(): void {}
-    execute(): void {}
+    abstract enter(): void
+    abstract exit(): void
+    abstract execute(time: number, delta: number): void
 }
 
 export default State

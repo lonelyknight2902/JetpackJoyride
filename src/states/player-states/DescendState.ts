@@ -20,7 +20,7 @@ class DescendState extends State {
         return
     }
 
-    execute(): void {
+    execute(time: number, delta: number): void {
         if (this._scene.input.keyboard?.createCursorKeys().space?.isDown) {
             console.log('Player is ascending')
             this.stateMachine.transition('player-ascend')

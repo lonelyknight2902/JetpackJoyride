@@ -84,14 +84,14 @@ class Player extends Phaser.GameObjects.Container {
         body.setCollideWorldBounds(true)
     }
 
-    update(): void {
+    update(time: number, delta: number): void {
         // this._playerHead.y = this.playerBody.y - 12
         // this.y = this.playerBody.parentContainer.y + this.playerBody.y - 12
         console.log(this.playerBody.y)
         // this.updatePlayerTexture()
         // this.x = this._playerBody.x
         // this.y = this._playerBody.y
-        this._stateMachine.update()
+        this._stateMachine.update(time, delta)
         // this.x = this._playerHead.x
         // this.y = this._playerHead.y
     }
