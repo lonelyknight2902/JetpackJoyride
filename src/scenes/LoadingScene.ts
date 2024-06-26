@@ -86,6 +86,10 @@ class LoadingScene extends Phaser.Scene {
         this.load.image('hallwayAssets', 'assets/atlas/hallway_assets.png')
         this.load.tilemapTiledJSON('hallwayMap', 'assets/hallway.json')
 
+        this.load.image('lab1', 'assets/Levels/lab1/lab1FG_1_TVOS.png')
+        this.load.image('lab2', 'assets/Levels/lab1/lab1FG_2_TVOS.png')
+        this.load.tilemapTiledJSON('labMap', 'assets/lab.json')
+
         this.load.atlas('hallway', 'assets/atlas/hallway_assets.png', 'assets/atlas/hallway_assets.json')
 
         this.load.image('bullet', 'assets/Characters/Effects/effect_smgbullet.png')
