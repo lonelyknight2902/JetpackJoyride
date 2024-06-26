@@ -1,7 +1,10 @@
 import { Player } from '../game-objects'
-import { HallwayMap, TitleMap } from '../maps'
+import { HallwayMap, LabMap, TitleMap } from '../maps'
+import { StateMachine } from '../states'
+import { GameOverState, PauseState, PlayState, StartState } from '../states/game-states'
 
 class PlayScene extends Phaser.Scene {
+    private stateMachine: StateMachine
     private _player: Player
     public cursors: Phaser.Types.Input.Keyboard.CursorKeys | undefined
     private _animatedTiles: any[] = []
@@ -10,7 +13,7 @@ class PlayScene extends Phaser.Scene {
     private map: Phaser.GameObjects.Container
     private mapList: Phaser.GameObjects.Container[] = []
     private readyMap: Phaser.GameObjects.Container[] = []
-    // private platforms: Phaser.Physics.Arcade.StaticGroup | undefined
+    private platforms: Phaser.Physics.Arcade.StaticGroup | undefined
     constructor() {
         super('PlayScene')
     }
@@ -35,21 +38,21 @@ class PlayScene extends Phaser.Scene {
         // background2.setOrigin(0, 0.5)
         // this.loadTileMap()
         this.map = this.add.container(0, 0)
-        const hallwayMap2 = new HallwayMap(this, 928 + 4032 - 32*6, 0)
+        const labmap = new LabMap(this, 928 + 4032 - 32*6, 0)
         const titleMap = new TitleMap(this, 0, 0)
         const hallwayMap = new HallwayMap(this, 928, 0)
         console.log(hallwayMap.width)
-        console.log(hallwayMap2.width)
+        console.log(labmap.width)
         console.log(titleMap.width)
         // hallwayMap2.getBackgroundLayer()?.setDepth(0)
         // hallwayMap.getBackgroundLayer()?.setDepth(1)
         // titleMap.getBackgroundLayer()?.setDepth(10)
         this.map.add(titleMap)
         this.map.add(hallwayMap)
-        this.map.add(hallwayMap2)
+        this.map.add(labmap)
         this.map.sendToBack(hallwayMap)
-        this.map.sendToBack(hallwayMap2)
-        this.mapList = [titleMap, hallwayMap, hallwayMap2]
+        this.map.sendToBack(labmap)
+        this.mapList = [titleMap, hallwayMap, labmap]
 
         this._player = new Player(this, 500, 200)
         this._player.setScale(2)
@@ -65,18 +68,18 @@ class PlayScene extends Phaser.Scene {
         // this.physics.add.existing(this._player)
         // player.play('touchdown')
         this.cursors = this.input.keyboard?.createCursorKeys()
-        const platforms = this.physics.add.staticGroup()
-        platforms
+        this.platforms = this.physics.add.staticGroup()
+        this.platforms
             .create(1365 / 2, 660, 'ground')
             .setScale(50, 1)
             .refreshBody()
-        platforms
+        this.platforms
             .create(1365 / 2, 100, 'ground')
             .setScale(50, 1)
             .refreshBody()
-        platforms.setVisible(false)
+        this.platforms.setVisible(false)
         // this.physics.add.collider(this._player, platforms)
-        this.physics.add.collider(this._player, platforms)
+        this.physics.add.collider(this._player, this.platforms)
         // this.physics.add.collider(this._player, pickup, (player, pickup) => {
         //     pickup.destroy()
         // })
@@ -85,6 +88,13 @@ class PlayScene extends Phaser.Scene {
         // this.cameras.main.startFollow(this._player)
         // this.cameras.
         // this.add.image(100, 100, 'hallway', 'sectorText_TVOS').setOrigin(0, 0)
+
+        this.stateMachine = new StateMachine('start', {
+            'start': new StartState(this),
+            'play': new PlayState(this),
+            'pause': new PauseState(this),
+            'over': new GameOverState(this),
+        })
     }
 
     update(time: number, delta: number) {
@@ -110,12 +120,17 @@ class PlayScene extends Phaser.Scene {
         })
 
         // this._player.getBullet().forEachAlive((bullet) => {
-        //     let particleBound = bullet.getBounds()
-        //     let platformsBound = this.platforms?.children.entries[0].rect
+        //     const particleBound = bullet.getBounds()
+        //     const platformsBound = this.platforms?.children.entries[0].body?.position.y
+        //     console.log(particleBound.bottom + this._player.y)
+        //     console.log(platformsBound)
+        //     if (platformsBound && particleBound.top + this._player.y > platformsBound) {
+        //         bullet.kill()
+        //     }
         // }, this)
-        // if (this.backgroundLayer) {
-        //     this.backgroundLayer.x -= 0.5
-        // }
+        if (this.backgroundLayer) {
+            this.backgroundLayer.x -= 0.5
+        }
     }
 
     loadTileMap() {
