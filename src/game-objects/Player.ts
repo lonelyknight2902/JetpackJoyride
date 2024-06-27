@@ -19,6 +19,7 @@ class Player extends Phaser.GameObjects.Container {
     private _bulletFlash: BulletFlash
     private bullet: Phaser.GameObjects.Particles.ParticleEmitter
     private _scene: Phaser.Scene
+    private static instance: Player
     // private _renderTexture: Phaser.GameObjects.RenderTexture
     // private _container: Phaser.GameObjects.Container
     constructor(scene: Phaser.Scene, x: number, y: number) {
@@ -82,6 +83,13 @@ class Player extends Phaser.GameObjects.Container {
         const body = this.body as Phaser.Physics.Arcade.Body
         body?.setSize(28, 34)
         body.setCollideWorldBounds(true)
+    }
+
+    public static getInstance(scene: Phaser.Scene, x: number, y: number): Player {
+        if (!Player.instance) {
+            Player.instance = new Player(scene, x, y)
+        }
+        return Player.instance
     }
 
     update(time: number, delta: number): void {
