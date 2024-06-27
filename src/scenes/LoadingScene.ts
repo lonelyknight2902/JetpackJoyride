@@ -67,8 +67,16 @@ class LoadingScene extends Phaser.Scene {
         this.load.image('hallway1', 'assets/Levels/Hallway1/hallway1FG_1_TVOS.png')
         this.load.image('hallway2', 'assets/Levels/Hallway1/hallway1FG_2_TVOS.png')
 
-        this.load.image('coin', 'assets/Entities/coin1_TVOS.png')
+        this.load.spritesheet('coin', 'assets/Entities/coin1_TVOS.png', {
+            frameWidth: 32,
+            frameHeight: 32,
+        })
+        this.load.spritesheet('coinCollect', 'assets/Entities/coinCollect1_TVOS.png', {
+            frameWidth: 64,
+            frameHeight: 64,
+        })
         this.load.tilemapTiledJSON('arrowCoinMap', 'assets/arrow-coin.json')
+        this.load.tilemapTiledJSON('coinShape', 'assets/coinShape1.json')
 
         this.load.image('alarmLight', 'assets/Levels/Title/alarmLight_TVOS.png')
         this.load.image('bestScreen', 'assets/Levels/Title/bestScreen_TVOS.png')
@@ -90,7 +98,11 @@ class LoadingScene extends Phaser.Scene {
         this.load.image('lab2', 'assets/Levels/lab1/lab1FG_2_TVOS.png')
         this.load.tilemapTiledJSON('labMap', 'assets/lab.json')
 
-        this.load.atlas('hallway', 'assets/atlas/hallway_assets.png', 'assets/atlas/hallway_assets.json')
+        this.load.atlas(
+            'hallway',
+            'assets/atlas/hallway_assets.png',
+            'assets/atlas/hallway_assets.json'
+        )
 
         this.load.image('bullet', 'assets/Characters/Effects/effect_smgbullet.png')
 
@@ -120,8 +132,6 @@ class LoadingScene extends Phaser.Scene {
             frameWidth: 64,
             frameHeight: 128,
         })
-
-
     }
 
     create() {

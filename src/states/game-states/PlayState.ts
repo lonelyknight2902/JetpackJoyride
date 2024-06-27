@@ -1,4 +1,4 @@
-import { TitleMap } from '../../maps'
+import { HallwayMap, LabMap, TitleMap } from '../../maps'
 import { PlayScene } from '../../scenes'
 import State from '../../types/State'
 
@@ -32,12 +32,13 @@ class PlayState extends State {
                     // this.readyMap.push(map)
                     // console.log(this.mapList)
                     map.x =
-                        mapList[mapList.length - 1].x +
-                        mapList[mapList.length - 1].width -
-                        6 * 32
+                        mapList[mapList.length - 1].x + mapList[mapList.length - 1].width - 6 * 32
                     mapList.push(map)
                     mapContainer.add(map)
                     mapContainer.sendToBack(map)
+                    if (map instanceof HallwayMap || map instanceof LabMap) {
+                        map.reset()
+                    }
                 }
             }
             map.x -= (500 * delta) / 1000

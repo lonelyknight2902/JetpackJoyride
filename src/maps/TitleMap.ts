@@ -1,6 +1,9 @@
+import { Coins } from "../game-objects"
+
 class TitleMap extends Phaser.GameObjects.Container {
     private map: Phaser.Tilemaps.Tilemap
     private backgroundLayer: Phaser.Tilemaps.TilemapLayer | null
+    private coins: Coins
     constructor(scene: Phaser.Scene, x: number, y: number) {
         super(scene, x, y)
         this.map = scene.make.tilemap({ key: 'titleMap' })

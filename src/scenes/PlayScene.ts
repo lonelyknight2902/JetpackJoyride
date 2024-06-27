@@ -25,6 +25,21 @@ class PlayScene extends Phaser.Scene {
             'animatedTiles',
             'animatedTiles'
         )
+
+        this.anims.create({
+            key: 'spin',
+            frames: this.anims.generateFrameNumbers('coin', { start: 0, end: 7 }),
+            frameRate: 10,
+            repeat: -1,
+        })
+
+        this.anims.create({
+            key: 'collect',
+            frames: this.anims.generateFrameNumbers('coinCollect', { start: 0, end: 3 }),
+            frameRate: 10,
+            repeat: 0,
+            hideOnComplete: true,
+        })
     }
 
     create() {
@@ -54,17 +69,10 @@ class PlayScene extends Phaser.Scene {
         this.map.sendToBack(labmap)
         this.mapList = [titleMap, hallwayMap, labmap]
 
-        this._player = new Player(this, 500, 200)
+        // this._player = new Player(this, 500, 200)
+        this._player = Player.getInstance(this, 500, 200)
         this._player.setScale(2)
         // const pickup = new Pickup(this, 200, 200)
-        const coinMap = this.make.tilemap({ key: 'arrowCoinMap' })
-        const coinTileset = coinMap.addTilesetImage('coin1_TVOS', 'coin')
-        this._tileMap = coinMap
-        if (coinTileset != null) {
-            const coinLayer = coinMap.createLayer('Tile Layer 1', coinTileset)
-            coinLayer?.setPosition(500, 0)
-        }
-        coinMap.getObjectLayer('Tile Layer 1')?.objects
         // this.physics.add.existing(this._player)
         // player.play('touchdown')
         this.cursors = this.input.keyboard?.createCursorKeys()
@@ -99,26 +107,6 @@ class PlayScene extends Phaser.Scene {
 
     update(time: number, delta: number) {
         this.stateMachine.update(time, delta)
-        // this._player.update(time, delta)
-        // this.map.each((map: Phaser.GameObjects.Container) => {
-        //     if (map.x + map.width < 0) {
-        //         this.map.remove(map)
-        //         this.mapList.shift()
-        //         if (!(map instanceof TitleMap)) {
-        //             // this.readyMap.push(map)
-        //             console.log(this.mapList)
-        //             map.x =
-        //                 this.mapList[this.mapList.length - 1].x +
-        //                 this.mapList[this.mapList.length - 1].width -
-        //                 6 * 32
-        //             this.mapList.push(map)
-        //             this.map.add(map)
-        //             this.map.sendToBack(map)
-        //         }
-        //     }
-        //     map.x -= (500 * delta) / 1000
-        //     map.update()
-        // })
 
         // this._player.getBullet().forEachAlive((bullet) => {
         //     const particleBound = bullet.getBounds()
