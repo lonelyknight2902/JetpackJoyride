@@ -16,10 +16,10 @@ class DieState extends State {
         this._player.getBullet().stop()
         this._player.getShell().stop()
         this._player.bulletFlash.setVisible(false)
-        // this._player.setRotation(90)
-        // const body = this._player.body as Phaser.Physics.Arcade.Body
-        // body?.setSize(38, 20)
-        // body.setOffset(-20, -30)
+        this._player.setAngle(-90)
+        const body = this._player.body as Phaser.Physics.Arcade.Body
+        body?.setSize(38, 20)
+        body.setOffset(-20, -30)
         // this._scene.
     }
 
