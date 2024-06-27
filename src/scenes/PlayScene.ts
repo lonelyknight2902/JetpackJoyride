@@ -1,10 +1,11 @@
-import { Player } from '../game-objects'
+import { LOWER_BOUND, SCREEN_HEIGHT, SCREEN_WIDTH, UPPER_BOUND } from '../constants'
+import { Player, Title } from '../game-objects'
 import { HallwayMap, LabMap, TitleMap } from '../maps'
 import { StateMachine } from '../states'
 import { GameOverState, PauseState, PlayState, StartState } from '../states/game-states'
 
 class PlayScene extends Phaser.Scene {
-    private stateMachine: StateMachine
+    public stateMachine: StateMachine
     private _player: Player
     public cursors: Phaser.Types.Input.Keyboard.CursorKeys | undefined
     private _animatedTiles: any[] = []
@@ -12,8 +13,11 @@ class PlayScene extends Phaser.Scene {
     private backgroundLayer: Phaser.Tilemaps.TilemapLayer | null
     private map: Phaser.GameObjects.Container
     private mapList: Phaser.GameObjects.Container[] = []
+    public initialMapList: Phaser.GameObjects.Container[] = []
     private readyMap: Phaser.GameObjects.Container[] = []
     private platforms: Phaser.Physics.Arcade.StaticGroup | undefined
+    private shadow: Phaser.GameObjects.Image
+    public title: Phaser.GameObjects.Container
     constructor() {
         super('PlayScene')
     }
@@ -52,6 +56,7 @@ class PlayScene extends Phaser.Scene {
         // const background2 = this.add.image(1024 - 228, 768 / 2, 'titleBackground2')
         // background2.setOrigin(0, 0.5)
         // this.loadTileMap()
+        this.cameras.main.fadeIn(1000, 0, 0, 0)
         this.map = this.add.container(0, 0)
         const labmap = new LabMap(this, 928 + 4032 - 32*6, 0)
         const titleMap = new TitleMap(this, 0, 0)
@@ -62,27 +67,32 @@ class PlayScene extends Phaser.Scene {
         // hallwayMap2.getBackgroundLayer()?.setDepth(0)
         // hallwayMap.getBackgroundLayer()?.setDepth(1)
         // titleMap.getBackgroundLayer()?.setDepth(10)
-        this.map.add(titleMap)
+        // this.map.add(titleMap)
         this.map.add(hallwayMap)
         this.map.add(labmap)
         this.map.sendToBack(hallwayMap)
         this.map.sendToBack(labmap)
-        this.mapList = [titleMap, hallwayMap, labmap]
+        this.initialMapList = [titleMap, hallwayMap, labmap]
 
+        this.title = new Title(this, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+        this.title.setScale(0.8)
         // this._player = new Player(this, 500, 200)
         this._player = Player.getInstance(this, 500, 200)
         this._player.setScale(2)
+        // this.shadow = new Phaser.GameObjects.Image(this, this._player.x + 14, 650, 'player-shadow')
+        this.shadow = this.add.image(this._player.x + 28, 650, 'player-shadow')
+        this.shadow.setScale(1.5)
         // const pickup = new Pickup(this, 200, 200)
         // this.physics.add.existing(this._player)
         // player.play('touchdown')
         this.cursors = this.input.keyboard?.createCursorKeys()
         this.platforms = this.physics.add.staticGroup()
         this.platforms
-            .create(1365 / 2, 660, 'ground')
+            .create(1365 / 2, LOWER_BOUND, 'ground')
             .setScale(50, 1)
             .refreshBody()
         this.platforms
-            .create(1365 / 2, 100, 'ground')
+            .create(1365 / 2, UPPER_BOUND, 'ground')
             .setScale(50, 1)
             .refreshBody()
         this.platforms.setVisible(false)
@@ -132,6 +142,14 @@ class PlayScene extends Phaser.Scene {
 
     public getMapList(): Phaser.GameObjects.Container[] {
         return this.mapList
+    }
+
+    public setMapList(mapList: Phaser.GameObjects.Container[]) {
+        this.mapList = mapList
+    }
+
+    public getShadow(): Phaser.GameObjects.Image {
+        return this.shadow
     }
 
     loadTileMap() {

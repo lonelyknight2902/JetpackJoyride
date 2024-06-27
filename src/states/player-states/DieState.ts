@@ -13,10 +13,22 @@ class DieState extends State {
         this._player.playerBody.anims.play('player-die')
         this._player.playerHead.anims.play('player-die')
         this._player.jetpack.setVisible(false)
+        this._player.getBullet().stop()
+        this._player.getShell().stop()
+        this._player.bulletFlash.setVisible(false)
+        // this._player.setRotation(90)
+        // const body = this._player.body as Phaser.Physics.Arcade.Body
+        // body?.setSize(38, 20)
+        // body.setOffset(-20, -30)
+        // this._scene.
     }
 
     exit(): void {
-        return
+        this._player.setRotation(0)
+        const body = this._player.body as Phaser.Physics.Arcade.Body
+        body?.setSize(24, 36)
+        body.setOffset(0, 0)
+        this._player.jetpack.setVisible(true)
     }
 
     execute(time: number, delta: number): void {

@@ -18,6 +18,7 @@ class AscendState extends State {
         this._player.bulletFlash.anims.play('bullet-flash')
         // this._player.getBullet().setAngle(Math.random() * 30 - 15)
         this._player.getBullet().start()
+        this._player.getShell().start()
         // this._player.setVelocityY(-200)
         // this._player.playerBody.setVelocityY(-200)
         // this._player.playerHead.setVelocityY(-200)
@@ -31,10 +32,12 @@ class AscendState extends State {
     }
 
     execute(time: number, delta: number): void {
+        // if(this._player.body?.)
+        const body = this._player.body as Phaser.Physics.Arcade.Body
         if (this._player.body && this._player.body.velocity.y > 0) {
             console.log('Player is descending')
             this.stateMachine.transition('player-descend')
-        } else if (this._scene.input.keyboard?.createCursorKeys().space?.isDown) {
+        } else if (this._scene.input.keyboard?.createCursorKeys().space?.isDown || this._scene.input.activePointer.isDown) {
             // this._player.setVelocityY(-200)
             // this._player.playerBody.setVelocityY(-200)
             // this._player.playerHead.setVelocityY(-200)
@@ -44,6 +47,7 @@ class AscendState extends State {
                 this._player.bulletFlash.setVisible(true)
                 this._player.bulletFlash.anims.play('bullet-flash')
                 this._player.getBullet().start()
+                this._player.getShell().start()
             }
             const body = this._player.body as Phaser.Physics.Arcade.Body
             body.setVelocityY(-ASCEND_SPEED)
@@ -51,6 +55,7 @@ class AscendState extends State {
             this._player.bulletFlash.setVisible(false)
             this._player.jetpack.anims.play('jetpack-ascend')
             this._player.getBullet().stop()
+            this._player.getShell().stop()
         }
     }
 }

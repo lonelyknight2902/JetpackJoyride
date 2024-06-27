@@ -18,10 +18,20 @@ class PlayState extends State {
     }
 
     execute(time: number, delta: number): void {
+        if (this.scene.getPlayer().getCurrentState() === 'player-die') {
+            this.stateMachine.transition('over')
+        }
+        const escapeKey = this.scene.input.keyboard?.addKey('ESC')
+        if (escapeKey?.isDown) {
+            this.stateMachine.transition('pause')
+        }
         // if (this.scene.input.keyboard?.checkDown(, 250)) {
         //     this.scene.getPlayer().jump()
         // }
         this.scene.getPlayer().update(time, delta)
+        this.scene
+            .getShadow()
+            .setScale(1.5 * (1 - (576 - this.scene.getPlayer().y) / (576 - 116)) + 0.1)
         const mapContainer = this.scene.getMap()
         const mapList = this.scene.getMapList()
         mapContainer.each((map: Phaser.GameObjects.Container) => {

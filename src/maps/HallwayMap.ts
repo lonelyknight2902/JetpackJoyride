@@ -1,9 +1,11 @@
-import { Coins } from "../game-objects"
+import { LOWER_BOUND, UPPER_BOUND } from "../constants"
+import { Coins, Zapper } from "../game-objects"
 
 class HallwayMap extends Phaser.GameObjects.Container {
     private map: Phaser.Tilemaps.Tilemap
     private backgroundLayer: Phaser.Tilemaps.TilemapLayer | null
     private coins: Coins
+    private zapper: Zapper
     constructor(scene: Phaser.Scene, x: number, y: number) {
         super(scene, x, y)
         this.map = scene.make.tilemap({ key: 'hallwayMap' })
@@ -20,7 +22,12 @@ class HallwayMap extends Phaser.GameObjects.Container {
                 this.backgroundLayer.setPosition(this.x, this.y)
             }
         }
-        this.coins = new Coins(scene, 2000, 500)
+        const coinX = Math.random() * (this.width - 200)
+        const coinY = Math.random() * (LOWER_BOUND - UPPER_BOUND - 100) + UPPER_BOUND
+
+        this.zapper = new Zapper(scene, 500, 200)
+        this.add(this.zapper)
+        this.coins = new Coins(scene, coinX, coinY)
         this.add(this.coins)
         scene.add.existing(this)
     }
@@ -37,6 +44,9 @@ class HallwayMap extends Phaser.GameObjects.Container {
 
     reset() {
         this.coins.resetCoin()
+        const coinX = Math.random() * (this.width - 200)
+        const coinY = Math.random() * (LOWER_BOUND - UPPER_BOUND - 100) + UPPER_BOUND
+        this.coins.setPosition(coinX, coinY)
     }
 }
 

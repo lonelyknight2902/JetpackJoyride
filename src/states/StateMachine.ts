@@ -6,7 +6,11 @@ class StateMachine {
     private _possibleStates: { [state: string]: State } = {}
     private _stateArgs: any[]
 
-    constructor(initialState: string, possibleStates: { [state: string]: State }, stateArgs: any[] = []) {
+    constructor(
+        initialState: string,
+        possibleStates: { [state: string]: State },
+        stateArgs: any[] = []
+    ) {
         this._initialState = initialState
         this._possibleStates = possibleStates
         this._state = null
@@ -25,8 +29,15 @@ class StateMachine {
     }
 
     public transition(stateKey: string): void {
+        if (this._state) {
+            this._possibleStates[this._state].exit()
+        }
         this._state = stateKey
         this._possibleStates[this._state].enter()
+    }
+
+    public getState(): string | null {
+        return this._state
     }
 }
 

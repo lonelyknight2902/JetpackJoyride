@@ -1,4 +1,4 @@
-import { GAME_GRAVITY } from './constants'
+import { GAME_GRAVITY, SCREEN_HEIGHT, SCREEN_WIDTH } from './constants'
 import { LoadingScene, PlayScene, PreloadScene, TestScene } from './scenes'
 
 class Game {
@@ -7,8 +7,8 @@ class Game {
         console.log('Game created')
         const config = {
             type: Phaser.AUTO,
-            width: 1365,
-            height: 768,
+            width: SCREEN_WIDTH,
+            height: SCREEN_HEIGHT,
             backgroundColor: '#ffffff',
             scene: [PreloadScene, LoadingScene, PlayScene, TestScene],
             physics: {

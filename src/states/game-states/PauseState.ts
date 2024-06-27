@@ -7,7 +7,7 @@ class PauseState extends State {
         super()
         this.scene = scene
     }
-    
+
     enter(): void {
         return
     }
@@ -17,7 +17,12 @@ class PauseState extends State {
     }
 
     execute(): void {
-        return
+        if (
+            this.scene.input.keyboard?.createCursorKeys().space?.isDown ||
+            this.scene.input.activePointer.isDown
+        ) {
+            this.stateMachine.transition('play')
+        }
     }
 }
 

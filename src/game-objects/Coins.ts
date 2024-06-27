@@ -32,7 +32,7 @@ class Coins extends Phaser.GameObjects.Container {
         console.log('Coin reset')
         this.coins.forEach((coin: Phaser.GameObjects.GameObject) => {
             // coin.setVisible(true)
-            ;(coin as Phaser.GameObjects.Sprite).setVisible(true)
+            (coin as Phaser.GameObjects.Sprite).setVisible(true)
             this.scene.anims.play('spin', coin)
         })
     }

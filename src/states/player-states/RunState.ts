@@ -22,7 +22,7 @@ class RunState extends State {
     }
 
     execute(): void {
-        if (this._scene.input.keyboard?.createCursorKeys().space?.isDown) {
+        if (this._scene.input.keyboard?.createCursorKeys().space?.isDown || this._scene.input.activePointer.isDown) {
             console.log('Player is ascending')
             this.stateMachine.transition('player-ascend')
         }

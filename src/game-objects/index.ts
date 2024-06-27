@@ -1,3 +1,6 @@
 export { default as Player } from './Player'
 export { default as Pickup } from './Pickup'
 export { default as Coins } from './Coins'
+export { default as Title } from './Title'
+export { default as Gramophone } from './Gramophone'
+export { default as Zapper } from './Zapper'

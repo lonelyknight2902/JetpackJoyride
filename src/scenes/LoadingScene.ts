@@ -1,3 +1,5 @@
+import { SCREEN_WIDTH } from '../constants'
+
 class LoadingScene extends Phaser.Scene {
     constructor() {
         super('LoadingScene')
@@ -7,7 +9,7 @@ class LoadingScene extends Phaser.Scene {
         const progressBar = this.add.graphics()
         const progressBox = this.add.graphics()
         progressBox.fillStyle(0x222222, 0.8)
-        progressBox.fillRect(240, 270, 320, 50)
+        progressBox.fillRect(SCREEN_WIDTH / 2 - 320 / 2, 270, 320, 50)
         const width = this.cameras.main.width
         const height = this.cameras.main.height
         const loadingText = this.make.text({
@@ -45,7 +47,7 @@ class LoadingScene extends Phaser.Scene {
         this.load.on('progress', function (value: number) {
             progressBar.clear()
             progressBar.fillStyle(0xffffff, 1)
-            progressBar.fillRect(250, 280, 300 * value, 30)
+            progressBar.fillRect(SCREEN_WIDTH / 2 - 320 / 2, 280, 300 * value, 30)
             percentText.setText(parseInt(String(value * 100)) + '%')
         })
 
@@ -105,6 +107,7 @@ class LoadingScene extends Phaser.Scene {
         )
 
         this.load.image('bullet', 'assets/Characters/Effects/effect_smgbullet.png')
+        this.load.image('shell', 'assets/Characters/Effects/effect_rocketmgshell_TVOS.png')
 
         this.load.spritesheet('bullet-flash', 'assets/Characters/Effects/bulletFlash_TVOS.png', {
             frameWidth: 64,
@@ -123,6 +126,8 @@ class LoadingScene extends Phaser.Scene {
             frameWidth: 32,
             frameHeight: 44,
         })
+
+        this.load.image('player-shadow', 'assets/Characters/effect_shadow.png')
         this.load.spritesheet('pickup', 'assets/Pickup/pickup_TVOS.png', {
             frameWidth: 128,
             frameHeight: 128,
@@ -131,6 +136,22 @@ class LoadingScene extends Phaser.Scene {
         this.load.spritesheet('gramophone', 'assets/Levels/Title/gramophone_TVOS.png', {
             frameWidth: 64,
             frameHeight: 128,
+        })
+
+        this.load.image('title', 'assets/Levels/Title/Objects/title_small.png')
+        this.load.image('titleGlow', 'assets/Levels/Title/Objects/titleGlow_small.png')
+
+        this.load.spritesheet('orb', 'assets/Obstacles/Zapper/orbAnim.png', {
+            frameWidth: 62,
+            frameHeight: 42
+        })
+        this.load.spritesheet('orbGlow', 'assets/Obstacles/Zapper/RegularZappers/glow.png', {
+            frameWidth: 128,
+            frameHeight: 128
+        })
+        this.load.spritesheet('zapper', 'assets/Obstacles/Zapper/RegularZappers/zapEffects.png', {
+            frameWidth: 256,
+            frameHeight: 117
         })
     }
 
