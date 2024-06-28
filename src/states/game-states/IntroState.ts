@@ -17,7 +17,7 @@ class IntroState extends State {
         this.scene.physics.moveToObject(this.scene.getPlayer(), this.target, GAME_SPEED)
         this.scene.cameras.main.shake(500, 0.01)
         this.scene.titleMap.displayHole()
-        this.scene.titleMap.displaySmoke()
+        this.scene.titleMap.explode()
     }
 
     exit(): void {

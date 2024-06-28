@@ -36,24 +36,27 @@ class TitleMap extends Phaser.GameObjects.Container {
         this.wallHole.setVisible(false)
         this.add(this.wallHole)
         this.dust = scene.add.particles(32, 690, 'dust', {
-            speed: 200,
+            speed: { min: 500, max: 900 },
             lifespan: 2000,
-            gravityY: 2000,
-            scale: 1,
+            gravityY: 150,
+            blendMode: 'ADD',
+            scale: { start: 1.5, end: 0 },
+            emitting: false
         })
-        this.smoke = scene.add.particles(32, 690, 'smoke', {
-            speed: 200,
-            lifespan: 2000,
-            gravityY: 2000,
-            scale: 1,
-        })
+        // this.smoke = scene.add.particles(32, 690, 'smoke', {
+        //     speed: 200,
+        //     lifespan: 2000,
+        //     gravityY: 2000,
+        //     blendMode: 'ADD',
+        //     scale: 1,
+        // })
         this.dust.setAngle(-90)
-        this.smoke.setAngle(-90)
+        // this.smoke.setAngle(-90)
         this.dust.stop()
-        this.smoke.stop()
+        // this.smoke.stop()
         // this.dust.stop()
         this.add(this.dust)
-        this.add(this.smoke)
+        // this.add(this.smoke)
         scene.add.existing(this)
     }
 
@@ -80,14 +83,19 @@ class TitleMap extends Phaser.GameObjects.Container {
         this.wallHole.setVisible(false)
     }
 
+    explode(): void {
+        this.dust.explode(90)
+        // this.smoke.explode(10, this.wallHole.x, this.wallHole.y)
+    }
+
     displaySmoke(): void {
         this.dust.start()
-        this.smoke.start()
+        // this.smoke.start()
     }
 
     hideSmoke(): void {
         this.dust.stop()
-        this.smoke.stop()
+        // this.smoke.stop()
     }
 }
 
