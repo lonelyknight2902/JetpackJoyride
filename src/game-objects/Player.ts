@@ -60,7 +60,7 @@ class Player extends Phaser.GameObjects.Container {
             speed: 100,
             lifespan: 1000,
             gravityY: 500,
-            scale: 0.2
+            scale: 0.2,
         })
         this.shell.setAngle(60)
         // this.bullet.createGravityWell(well)
@@ -154,6 +154,13 @@ class Player extends Phaser.GameObjects.Container {
 
     public getCurrentState(): string | null {
         return this._stateMachine.getState()
+    }
+
+    public isDead(): boolean {
+        return (
+            this._stateMachine.getState() === 'player-die' &&
+            this._playerBody.anims.getProgress() === 1
+        )
     }
 
     // updatePlayerTexture() {

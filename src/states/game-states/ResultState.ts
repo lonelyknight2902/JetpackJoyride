@@ -1,8 +1,10 @@
+import { LabMap, HallwayMap } from '../../maps'
 import { PlayScene } from '../../scenes'
 import State from '../../types/State'
 
-class PauseState extends State {
+class ResultState extends State {
     private scene: PlayScene
+    private time: number
     constructor(scene: PlayScene) {
         super()
         this.scene = scene
@@ -13,7 +15,12 @@ class PauseState extends State {
     }
 
     exit(): void {
-        return
+        this.scene.initialMapList.forEach((map) => {
+            if (map instanceof LabMap || map instanceof HallwayMap) {
+                map.reset()
+            }
+        })
+        this.scene.scoreManager.reset()
     }
 
     execute(time: number, delta: number): void {
@@ -21,9 +28,10 @@ class PauseState extends State {
             this.scene.input.keyboard?.createCursorKeys().space?.isDown ||
             this.scene.input.activePointer.isDown
         ) {
-            this.stateMachine.transition('play')
+            this.stateMachine.transition('start')
+            this.scene.getPlayer().stateMachine.transition('player-run')
         }
     }
 }
 
-export default PauseState
+export default ResultState

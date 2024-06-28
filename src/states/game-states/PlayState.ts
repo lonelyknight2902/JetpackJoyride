@@ -1,3 +1,4 @@
+import { GAME_SPEED } from '../../constants'
 import { HallwayMap, LabMap, TitleMap } from '../../maps'
 import { PlayScene } from '../../scenes'
 import State from '../../types/State'
@@ -25,15 +26,13 @@ class PlayState extends State {
         if (escapeKey?.isDown) {
             this.stateMachine.transition('pause')
         }
-        // if (this.scene.input.keyboard?.checkDown(, 250)) {
-        //     this.scene.getPlayer().jump()
-        // }
         this.scene.getPlayer().update(time, delta)
         this.scene
             .getShadow()
             .setScale(1.5 * (1 - (576 - this.scene.getPlayer().y) / (576 - 116)) + 0.1)
         const mapContainer = this.scene.getMap()
         const mapList = this.scene.getMapList()
+        const distance = (GAME_SPEED * delta) / 1000
         mapContainer.each((map: Phaser.GameObjects.Container) => {
             if (map.x + map.width < 0) {
                 mapContainer.remove(map)
@@ -51,9 +50,12 @@ class PlayState extends State {
                     }
                 }
             }
-            map.x -= (500 * delta) / 1000
+            map.x -= distance
             map.update()
         })
+        this.scene.scoreManager.increaseDistance(distance / 32)
+        this.scene.distanceText.setText(`${String(Math.floor(this.scene.scoreManager.getDistance())).padStart(4, '0')}m`)
+        this.scene.coinText.setText(`${String(Math.floor(this.scene.scoreManager.getCoin())).padStart(3, '0')}`)
     }
 }
 

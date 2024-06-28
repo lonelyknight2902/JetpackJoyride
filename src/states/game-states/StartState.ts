@@ -35,7 +35,7 @@ class StartState extends State {
         })
     }
 
-    execute(): void {
+    execute(time: number, delta: number): void {
         if (this.scene.input.keyboard?.createCursorKeys().space?.isDown || this.scene.input.activePointer.isDown) {
             console.log('StartState -> PlayState')
             this.stateMachine.transition('play')

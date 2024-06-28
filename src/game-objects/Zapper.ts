@@ -14,6 +14,7 @@ class Zapper extends Phaser.GameObjects.Container {
         this.glow1 = scene.add.sprite(0, 0, 'orbGlow')
         this.glow2 = scene.add.sprite(0, 200, 'orbGlow')
         this.orb1.flipY = true
+        this.orb1.flipX = true
         this.zapper.setScale(200 / this.zapper.width)
         this.orb1.setOrigin(0.5)
         this.orb2.setOrigin(0.5)
@@ -25,13 +26,13 @@ class Zapper extends Phaser.GameObjects.Container {
         this.orb1.anims.create({
             key: 'orb',
             frames: this.orb1.anims.generateFrameNumbers('orb', { start: 0, end: 3 }),
-            frameRate: 4,
+            frameRate: 10,
             repeat: -1,
         })
         this.orb2.anims.create({
             key: 'orb',
             frames: this.orb2.anims.generateFrameNumbers('orb', { start: 0, end: 3 }),
-            frameRate: 4,
+            frameRate: 10,
             repeat: -1,
         })
         this.zapper.anims.create({
