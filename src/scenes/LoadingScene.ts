@@ -61,11 +61,12 @@ class LoadingScene extends Phaser.Scene {
             loadingText.destroy()
             percentText.destroy()
             assetText.destroy()
-            background.destroy()
+            // background.destroy()
         })
 
         this.load.image('titleBackground1', 'assets/Levels/Title/titleFG_1_TVOS.png')
         this.load.image('titleBackground2', 'assets/Levels/Title/titleFG_2_TVOS.png')
+        this.load.image('titleWallHole', 'assets/Levels/Title/titleWallHole.png')
         this.load.image('hallway1', 'assets/Levels/Hallway1/hallway1FG_1_TVOS.png')
         this.load.image('hallway2', 'assets/Levels/Hallway1/hallway1FG_2_TVOS.png')
 
@@ -108,6 +109,8 @@ class LoadingScene extends Phaser.Scene {
 
         this.load.image('bullet', 'assets/Characters/Effects/effect_smgbullet.png')
         this.load.image('shell', 'assets/Characters/Effects/effect_rocketmgshell_TVOS.png')
+        this.load.image('dust', 'assets/particles/dust.png')
+        this.load.image('smoke', 'assets/particles/smoke.png')
 
         this.load.spritesheet('bullet-flash', 'assets/Characters/Effects/bulletFlash_TVOS.png', {
             frameWidth: 64,

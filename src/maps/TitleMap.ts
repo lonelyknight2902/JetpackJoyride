@@ -4,6 +4,9 @@ class TitleMap extends Phaser.GameObjects.Container {
     private map: Phaser.Tilemaps.Tilemap
     private backgroundLayer: Phaser.Tilemaps.TilemapLayer | null
     private coins: Coins
+    private wallHole: Phaser.GameObjects.Image
+    private dust: Phaser.GameObjects.Particles.ParticleEmitter
+    private smoke: Phaser.GameObjects.Particles.ParticleEmitter
     constructor(scene: Phaser.Scene, x: number, y: number) {
         super(scene, x, y)
         this.map = scene.make.tilemap({ key: 'titleMap' })
@@ -16,7 +19,6 @@ class TitleMap extends Phaser.GameObjects.Container {
             'titleFG_2_TVOS',
             'titleBackground2'
         )
-
         if (backgroundTitleTileset && backgroundTitleTileset2) {
             this.backgroundLayer = this.map.createLayer('Background', [
                 backgroundTitleTileset,
@@ -28,6 +30,30 @@ class TitleMap extends Phaser.GameObjects.Container {
             }
         }
 
+        this.wallHole = scene.add.image(32, 690, 'titleWallHole')
+        this.wallHole.setOrigin(0.25, 1)
+        this.wallHole.setScale(2)
+        this.wallHole.setVisible(false)
+        this.add(this.wallHole)
+        this.dust = scene.add.particles(32, 690, 'dust', {
+            speed: 200,
+            lifespan: 2000,
+            gravityY: 2000,
+            scale: 1,
+        })
+        this.smoke = scene.add.particles(32, 690, 'smoke', {
+            speed: 200,
+            lifespan: 2000,
+            gravityY: 2000,
+            scale: 1,
+        })
+        this.dust.setAngle(-90)
+        this.smoke.setAngle(-90)
+        this.dust.stop()
+        this.smoke.stop()
+        // this.dust.stop()
+        this.add(this.dust)
+        this.add(this.smoke)
         scene.add.existing(this)
     }
 
@@ -40,6 +66,28 @@ class TitleMap extends Phaser.GameObjects.Container {
 
     getBackgroundLayer(): Phaser.Tilemaps.TilemapLayer | null {
         return this.backgroundLayer
+    }
+
+    getWallHole(): Phaser.GameObjects.Image {
+        return this.wallHole
+    }
+
+    displayHole(): void {
+        this.wallHole.setVisible(true)
+    }
+
+    hideHole(): void {
+        this.wallHole.setVisible(false)
+    }
+
+    displaySmoke(): void {
+        this.dust.start()
+        this.smoke.start()
+    }
+
+    hideSmoke(): void {
+        this.dust.stop()
+        this.smoke.stop()
     }
 }
 

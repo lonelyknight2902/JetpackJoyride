@@ -13,8 +13,6 @@ class DieState extends State {
         this._player.playerBody.anims.play('player-die')
         this._player.playerHead.anims.play('player-die')
         this._player.jetpack.setVisible(false)
-        this._player.getBullet().stop()
-        this._player.getShell().stop()
         this._player.bulletFlash.setVisible(false)
         this._player.setAngle(-90)
         const body = this._player.body as Phaser.Physics.Arcade.Body
@@ -29,6 +27,8 @@ class DieState extends State {
         body?.setSize(24, 36)
         body.setOffset(0, 0)
         this._player.jetpack.setVisible(true)
+        this._player.getBullet().setVisible(true)
+        this._player.getShell().setVisible(true)
     }
 
     execute(time: number, delta: number): void {

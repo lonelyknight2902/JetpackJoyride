@@ -15,14 +15,15 @@ class GameOverState extends State {
     }
 
     exit(): void {
-        return
+        this.scene.resultUI.update()
     }
 
     execute(time: number, delta: number): void {
-        if (
-            this.scene.getPlayer().isDead()
-        ) {
-            this.stateMachine.transition('result')
+        if (this.scene.getPlayer().isDead()) {
+            const body = this.scene.getPlayer().body as Phaser.Physics.Arcade.Body
+            if (body.blocked.down) {
+                this.stateMachine.transition('result')
+            }
             // this.scene.getPlayer().stateMachine.transition('player-run')
         }
         this.scene.getPlayer().update(time, delta)
@@ -51,6 +52,8 @@ class GameOverState extends State {
             map.x -= (500 * delta) / 1000
             map.update()
         })
+        // this.scene.scoreManager.increaseDistance((500 * delta) / 32)
+        // this.scene.scoreUI.update()
     }
 }
 

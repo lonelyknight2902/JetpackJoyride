@@ -5,25 +5,26 @@ import State from '../../types/State'
 
 class PlayState extends State {
     private scene: PlayScene
+    private pauseKey: Phaser.Input.Keyboard.Key | undefined
+    private elapsedTime = 0
     constructor(scene: PlayScene) {
         super()
         this.scene = scene
     }
 
     enter(): void {
-        return
+        this.pauseKey = this.scene.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.ESC)
     }
 
     exit(): void {
-        return
+        this.elapsedTime = 0
     }
 
     execute(time: number, delta: number): void {
         if (this.scene.getPlayer().getCurrentState() === 'player-die') {
             this.stateMachine.transition('over')
         }
-        const escapeKey = this.scene.input.keyboard?.addKey('ESC')
-        if (escapeKey?.isDown) {
+        if (this.pauseKey?.isDown && this.elapsedTime > 500) {
             this.stateMachine.transition('pause')
         }
         this.scene.getPlayer().update(time, delta)
@@ -53,9 +54,15 @@ class PlayState extends State {
             map.x -= distance
             map.update()
         })
+        const wallHole = this.scene.titleMap.getWallHole()
+        if (wallHole.x + wallHole.width > 0) {
+            wallHole.x -= distance
+        }
         this.scene.scoreManager.increaseDistance(distance / 32)
-        this.scene.distanceText.setText(`${String(Math.floor(this.scene.scoreManager.getDistance())).padStart(4, '0')}m`)
-        this.scene.coinText.setText(`${String(Math.floor(this.scene.scoreManager.getCoin())).padStart(3, '0')}`)
+        // this.scene.distanceText.setText(`${String(Math.floor(this.scene.scoreManager.getDistance())).padStart(4, '0')}m`)
+        // this.scene.coinText.setText(`${String(Math.floor(this.scene.scoreManager.getCoin())).padStart(3, '0')}`)
+        this.scene.scoreUI.update()
+        this.elapsedTime += delta
     }
 }
 

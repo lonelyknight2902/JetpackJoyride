@@ -11,7 +11,9 @@ class ResultState extends State {
     }
 
     enter(): void {
-        return
+        this.scene.resultUI.update()
+        this.scene.resultUI.setVisible(true)
+        this.scene.overlay.setVisible(true)
     }
 
     exit(): void {
@@ -21,6 +23,9 @@ class ResultState extends State {
             }
         })
         this.scene.scoreManager.reset()
+        this.scene.resultUI.setVisible(false)
+        this.scene.overlay.setVisible(false)
+        this.scene.resultUI.update()
     }
 
     execute(time: number, delta: number): void {

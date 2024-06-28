@@ -9,12 +9,12 @@ class Game {
             type: Phaser.AUTO,
             width: SCREEN_WIDTH,
             height: SCREEN_HEIGHT,
-            backgroundColor: '#ffffff',
+            backgroundColor: '#000000',
             scene: [PreloadScene, LoadingScene, PlayScene, TestScene],
             physics: {
                 default: 'arcade',
                 arcade: {
-                    debug: true,
+                    // debug: true,
                     gravity: { x: 0, y: GAME_GRAVITY },
                 },
             },

@@ -15,6 +15,8 @@ class ZapState extends State {
         this._player.jetpack.setVisible(false)
         this._player.getBullet().stop()
         this._player.getShell().stop()
+        this._player.getBullet().setVisible(false)
+        this._player.getShell().setVisible(false)
         console.log('Player is zapping')
     }
 

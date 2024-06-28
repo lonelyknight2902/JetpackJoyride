@@ -22,7 +22,7 @@ class Coins extends Phaser.GameObjects.Container {
         })
         this.scoreManager = ScoreManager.getInstance()
 
-        const player = Player.getInstance(scene, 500, 200)
+        const player = Player.getInstance(scene, 200, 200)
         scene.physics.add.overlap(player, this.coins, this.collectCoin, undefined, this)
         this.scene.add.existing(this)
     }
@@ -37,7 +37,7 @@ class Coins extends Phaser.GameObjects.Container {
 
     resetCoin(): void {
         console.log('Coin reset')
-        this.coins.forEach((coin: Phaser.GameObjects.GameObject) => {
+        this.coins.filter((coin) => coin.state == 'collected').forEach((coin: Phaser.GameObjects.GameObject) => {
             // coin.setVisible(true)
             (coin as Phaser.GameObjects.Sprite).setVisible(true)
             this.scene.anims.play('spin', coin)

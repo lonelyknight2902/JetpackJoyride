@@ -23,6 +23,7 @@ class Player extends Phaser.GameObjects.Container {
     // private shadow: Phaser.GameObjects.Image
     private _scene: Phaser.Scene
     private static instance: Player
+    private currentVelocity: Phaser.Math.Vector2
     // private _renderTexture: Phaser.GameObjects.RenderTexture
     // private _container: Phaser.GameObjects.Container
     constructor(scene: Phaser.Scene, x: number, y: number) {
@@ -161,6 +162,24 @@ class Player extends Phaser.GameObjects.Container {
             this._stateMachine.getState() === 'player-die' &&
             this._playerBody.anims.getProgress() === 1
         )
+    }
+
+    public pause(): void {
+        this.playerBody.anims.pause()
+        this.playerHead.anims.pause()
+        this.jetpack.anims.pause()
+        this.bulletFlash.anims.pause()
+        this.bullet.pause()
+        this.shell.pause()
+    }
+
+    public resume(): void {
+        this.playerBody.anims.resume()
+        this.playerHead.anims.resume()
+        this.jetpack.anims.resume()
+        this.bulletFlash.anims.resume()
+        this.bullet.resume()
+        this.shell.resume()
     }
 
     // updatePlayerTexture() {

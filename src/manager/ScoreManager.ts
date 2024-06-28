@@ -2,10 +2,18 @@ class ScoreManager {
     private static instance: ScoreManager
     private distance = 0
     private coin = 0
+    private bestDistance = 0
 
     private constructor() {
         this.distance = 0
         this.coin = 0
+        const bestDistance = localStorage.getItem('bestDistance')
+        if (bestDistance) {
+            this.bestDistance = parseInt(bestDistance)
+        } else {
+            this.bestDistance = 0
+            localStorage.setItem('bestDistance', '0')
+        }
     }
 
     public static getInstance(): ScoreManager {
@@ -17,6 +25,10 @@ class ScoreManager {
 
     public getDistance(): number {
         return this.distance
+    }
+
+    public getBestDistance(): number {
+        return this.bestDistance
     }
 
     public getCoin(): number {
@@ -33,6 +45,9 @@ class ScoreManager {
 
     public increaseDistance(distance: number): void {
         this.distance += distance
+        if (Math.floor(this.distance) > this.bestDistance) {
+            this.bestDistance = Math.floor(this.distance)
+        }
     }
 
     public increaseCoin(coin: number): void {
@@ -48,6 +63,7 @@ class ScoreManager {
     }
 
     public reset(): void {
+        localStorage.setItem('bestDistance', String(this.bestDistance))
         this.resetDistance()
         this.resetCoin()
     }
