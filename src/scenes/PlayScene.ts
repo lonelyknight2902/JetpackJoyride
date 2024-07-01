@@ -1,7 +1,15 @@
-import { LOWER_BOUND, SCREEN_HEIGHT, SCREEN_WIDTH, UPPER_BOUND } from '../constants'
-import { Player, Title } from '../game-objects'
+import {
+    LOWER_BOUND,
+    MAX_INTERVAL,
+    MIN_INTERVAL,
+    SCREEN_HEIGHT,
+    SCREEN_WIDTH,
+    UPPER_BOUND,
+} from '../constants'
+import { Missile, Player, Title } from '../game-objects'
 import { ScoreManager } from '../manager'
 import { HallwayMap, LabMap, TitleMap } from '../maps'
+import { ZapperPool } from '../object-pools'
 import { StateMachine } from '../states'
 import {
     GameOverState,
@@ -30,6 +38,9 @@ class PlayScene extends Phaser.Scene {
     public scoreUI: Phaser.GameObjects.Container
     public overlay: Phaser.GameObjects.Graphics
     public titleMap: TitleMap
+    public missile: Missile
+    public zapperPool: ZapperPool
+    public zapperSpawnEvent: Phaser.Time.TimerEvent
     // public wallHole: Phaser.GameObjects.Image
     constructor() {
         super('PlayScene')
@@ -104,6 +115,20 @@ class PlayScene extends Phaser.Scene {
             .refreshBody()
         this.platforms.setVisible(false)
         this.physics.add.collider(this._player, this.platforms)
+        this.missile = new Missile(this, 200, 200)
+        this.zapperPool = new ZapperPool(this)
+        this.zapperPool.initializeWithSize(10)
+        this.zapperSpawnEvent = this.time.addEvent({
+            delay: Phaser.Math.Between(MIN_INTERVAL, MAX_INTERVAL),
+            callback: () => {
+                this.zapperPool.spawn(
+                    SCREEN_WIDTH + 200,
+                    Phaser.Math.Between(LOWER_BOUND, UPPER_BOUND)
+                )
+            },
+            loop: true,
+            paused: true,
+        })
         // this.physics.add.collider(this._player.getBullet(), this.platforms)
         this.overlay = this.add.graphics()
         this.overlay.fillStyle(0x000000, 0.7)

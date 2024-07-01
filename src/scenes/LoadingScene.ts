@@ -156,6 +156,21 @@ class LoadingScene extends Phaser.Scene {
             frameWidth: 256,
             frameHeight: 117
         })
+
+        this.load.spritesheet('missile', 'assets/Obstacles/Missile/missile.png', {
+            frameWidth: 32,
+            frameHeight: 32,
+        })
+
+        this.load.spritesheet('missileEffects', 'assets/Obstacles/Missile/missileEffects.png', {
+            frameWidth: 64,
+            frameHeight: 64,
+        })
+
+        this.load.spritesheet('explosion', 'assets/Obstacles/Missile/missileExplosion.png', {
+            frameWidth: 64,
+            frameHeight: 64,
+        })
     }
 
     create() {

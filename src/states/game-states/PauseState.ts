@@ -15,6 +15,7 @@ class PauseState extends State {
         this.scene.getPlayer().pause()
         this.pauseKey = this.scene.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.ESC)
         this.scene.physics.pause()
+        this.scene.zapperSpawnEvent.paused = true
         // this.scene.scene.pause()
     }
 
