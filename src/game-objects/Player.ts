@@ -1,3 +1,4 @@
+import { BulletPool } from '../object-pools'
 import { StateMachine } from '../states'
 import {
     AscendState,
@@ -18,45 +19,21 @@ class Player extends Phaser.GameObjects.Container {
     private _playerHead: PlayerHead
     private _jetpack: Jetpack
     private _bulletFlash: BulletFlash
-    private bullet: Phaser.GameObjects.Particles.ParticleEmitter
     private shell: Phaser.GameObjects.Particles.ParticleEmitter
-    // private shadow: Phaser.GameObjects.Image
+    public bulletPool: BulletPool
     private _scene: Phaser.Scene
     private static instance: Player
-    private currentVelocity: Phaser.Math.Vector2
     // private _renderTexture: Phaser.GameObjects.RenderTexture
     // private _container: Phaser.GameObjects.Container
     constructor(scene: Phaser.Scene, x: number, y: number) {
         // texture: string, renderTexture: Phaser.GameObjects.RenderTexture
         super(scene, x, y)
-        // this.setSize(16, 32)
         this._scene = scene
         this._playerBody = new PlayerBody(scene, 16, 22, 'player-body')
         this._playerHead = new PlayerHead(scene, 16, 10, 'player-head')
         this._jetpack = new Jetpack(scene, 4, 19, 'jetpack')
         this._bulletFlash = new BulletFlash(scene, 4, 45, 'bullet-flash')
         this._bulletFlash.setScale(0.4)
-        // this.shadow.setScale(1)
-        const dist = new Phaser.Math.Vector2()
-        const force = new Phaser.Math.Vector2()
-        // let well = {
-        //     x: 512,
-        //     y: 384,
-        //     active: true,
-        //     update: function (p) {
-        //         dist.copy(this).subtract(p)
-
-        //         const len = dist.length()
-        //         p.accelerationX = force.x
-        //         p.accelerationY = force.y
-        //     },
-        // }
-        this.bullet = scene.add.particles(4, 45, 'bullet', {
-            speed: 100,
-            lifespan: 500,
-            gravityY: 3000,
-            rotate: 90,
-        })
         this.shell = scene.add.particles(4, 25, 'shell', {
             speed: 100,
             lifespan: 1000,
@@ -64,20 +41,16 @@ class Player extends Phaser.GameObjects.Container {
             scale: 0.2,
         })
         this.shell.setAngle(60)
-        // this.bullet.createGravityWell(well)
         this.shell.stop()
-        this.bullet.stop()
         this.add(this._playerBody)
         this.add(this._playerHead)
         this.add(this._jetpack)
         this.add(this._bulletFlash)
-        this.add(this.bullet)
         this.add(this.shell)
-        // this.add(this.shadow)
-        this.sendToBack(this.bullet)
         this.sendToBack(this.shell)
-        // this.sendToBack(this.shadow)
         this._bulletFlash.setVisible(false)
+        this.bulletPool = new BulletPool(scene)
+        this.bulletPool.initializeWithSize(10)
         // this._container = new Phaser.GameObjects.Container(scene, x, y, [this._playerBody, this._playerHead])
         // let body = this._container.body as Phaser.Physics.Arcade.Body
         // this._container.setSize(32, 64)
@@ -95,9 +68,7 @@ class Player extends Phaser.GameObjects.Container {
             'player-die': new DieState(this, scene),
         })
         scene.add.existing(this)
-        // this.setBodySize(16, 32)
         scene.physics.add.existing(this)
-        // scene.physics.add.existing(this.bullet)
         const body = this.body as Phaser.Physics.Arcade.Body
         body?.setSize(28, 34)
         body.setCollideWorldBounds(true)
@@ -117,6 +88,7 @@ class Player extends Phaser.GameObjects.Container {
         // this.x = this._playerBody.x
         // this.y = this._playerBody.y
         this._stateMachine.update(time, delta)
+        this.bulletPool.update()
         // this.shadow.setPosition(14, (LOWER_BOUND - this.y) / this.scale)
         // console.log(this.shadow.y)
         // console.log(LOWER_BOUND - this.y)
@@ -145,10 +117,6 @@ class Player extends Phaser.GameObjects.Container {
         return this._stateMachine
     }
 
-    public getBullet(): Phaser.GameObjects.Particles.ParticleEmitter {
-        return this.bullet
-    }
-
     public getShell(): Phaser.GameObjects.Particles.ParticleEmitter {
         return this.shell
     }
@@ -169,7 +137,6 @@ class Player extends Phaser.GameObjects.Container {
         this.playerHead.anims.pause()
         this.jetpack.anims.pause()
         this.bulletFlash.anims.pause()
-        this.bullet.pause()
         this.shell.pause()
     }
 
@@ -178,7 +145,6 @@ class Player extends Phaser.GameObjects.Container {
         this.playerHead.anims.resume()
         this.jetpack.anims.resume()
         this.bulletFlash.anims.resume()
-        this.bullet.resume()
         this.shell.resume()
     }
 
