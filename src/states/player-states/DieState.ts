@@ -27,7 +27,6 @@ class DieState extends State {
         body?.setSize(24, 36)
         body.setOffset(0, 0)
         this._player.jetpack.setVisible(true)
-        this._player.getBullet().setVisible(true)
         this._player.getShell().setVisible(true)
     }
 

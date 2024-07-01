@@ -1,5 +1,5 @@
-import { Player } from "../../game-objects";
-import State from "../../types/State";
+import { Player } from '../../game-objects'
+import State from '../../types/State'
 
 class ZapState extends State {
     private _player: Player
@@ -13,9 +13,7 @@ class ZapState extends State {
         this._player.playerBody.anims.play('player-zap')
         this._player.playerHead.anims.play('player-zap')
         this._player.jetpack.setVisible(false)
-        this._player.getBullet().stop()
         this._player.getShell().stop()
-        this._player.getBullet().setVisible(false)
         this._player.getShell().setVisible(false)
         console.log('Player is zapping')
     }
@@ -25,7 +23,10 @@ class ZapState extends State {
     }
 
     execute(): void {
-        if (this._player.playerBody.anims.getProgress() === 1 && this._player.playerHead.anims.getProgress() === 1) {
+        if (
+            this._player.playerBody.anims.getProgress() === 1 &&
+            this._player.playerHead.anims.getProgress() === 1
+        ) {
             console.log('Player is dead')
             this.stateMachine.transition('player-die')
         }
