@@ -12,6 +12,7 @@ class ZapState extends State {
     enter(): void {
         this._player.playerBody.anims.play('player-zap')
         this._player.playerHead.anims.play('player-zap')
+        this._player.playerBoneAudio.play()
         this._player.jetpack.setVisible(false)
         this._player.getShell().stop()
         this._player.getShell().setVisible(false)

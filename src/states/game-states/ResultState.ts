@@ -16,6 +16,7 @@ class ResultState extends State {
         this.scene.overlay.setVisible(true)
         this.scene.physics.pause()
         this.scene.levelMusic.stop()
+        this.scene.menuMusic.play()
     }
 
     exit(): void {
@@ -29,6 +30,7 @@ class ResultState extends State {
         this.scene.overlay.setVisible(false)
         this.scene.resultUI.update()
         this.scene.physics.resume()
+        this.scene.menuMusic.stop()
     }
 
     execute(time: number, delta: number): void {

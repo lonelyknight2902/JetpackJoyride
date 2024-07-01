@@ -1,4 +1,3 @@
-import { TRANSITION_DELAY } from '../../constants'
 import { PlayScene } from '../../scenes'
 import State from '../../types/State'
 
@@ -16,6 +15,8 @@ class PauseState extends State {
         this.pauseKey = this.scene.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.ESC)
         this.scene.physics.pause()
         this.scene.zapperSpawnEvent.paused = true
+        this.scene.sound.pauseAll()
+        this.scene.menuMusic.play()
         // this.scene.scene.pause()
     }
 
@@ -23,6 +24,8 @@ class PauseState extends State {
         this.scene.getPlayer().resume()
         this.scene.physics.resume()
         this.elapsedTime = 0
+        this.scene.sound.resumeAll()
+        this.scene.menuMusic.stop()
         // this.scene.scene.resume()
     }
 

@@ -42,6 +42,7 @@ class PlayScene extends Phaser.Scene {
     public zapperPool: ZapperPool
     public zapperSpawnEvent: Phaser.Time.TimerEvent
     public levelMusic: Phaser.Sound.BaseSound
+    public menuMusic: Phaser.Sound.BaseSound
     public menuAmbiance: Phaser.Sound.BaseSound
     public windowSmash: Phaser.Sound.BaseSound
     constructor() {
@@ -125,6 +126,7 @@ class PlayScene extends Phaser.Scene {
         this.levelMusic = this.sound.add('musicLevel', { loop: true })
         this.menuAmbiance = this.sound.add('menuAmbiance', { loop: true })
         this.windowSmash = this.sound.add('windowSmash')
+        this.menuMusic = this.sound.add('menuMusic', { loop: true })
         this.stateMachine = new StateMachine('start', {
             start: new StartState(this),
             intro: new IntroState(this),

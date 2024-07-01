@@ -23,6 +23,7 @@ class Player extends Phaser.GameObjects.Container {
     public bulletPool: BulletPool
     private _scene: Phaser.Scene
     private static instance: Player
+    public playerBoneAudio: Phaser.Sound.BaseSound
     // private _renderTexture: Phaser.GameObjects.RenderTexture
     // private _container: Phaser.GameObjects.Container
     constructor(scene: Phaser.Scene, x: number, y: number) {
@@ -72,6 +73,7 @@ class Player extends Phaser.GameObjects.Container {
         const body = this.body as Phaser.Physics.Arcade.Body
         body?.setSize(28, 34)
         body.setCollideWorldBounds(true)
+        this.playerBoneAudio = scene.sound.add('playerBones')
     }
 
     public static getInstance(scene: Phaser.Scene, x: number, y: number): Player {

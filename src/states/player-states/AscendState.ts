@@ -67,7 +67,6 @@ class AscendState extends State {
                     bulletBody.velocity.y / Math.tan(this.currentAngle * (Math.PI / 180))
                 )
                 this._player.getShell().start()
-                if (!this._player.jetpack.fireSound.isPlaying) this._player.jetpack.fireSound.play()
             } else if (this._bulletTimer > FIRE_RATE) {
                 // this.currentAngle += this.angleStep
                 // if (this.currentAngle > MAX_ANGLE) {
@@ -88,10 +87,8 @@ class AscendState extends State {
                 bulletBody.setVelocityX(
                     bulletBody.velocity.y / Math.tan(this.currentAngle * (Math.PI / 180))
                 )
-                if (!this._player.jetpack.fireSound.isPlaying) this._player.jetpack.fireSound.play()
-            } else {
-                this._player.jetpack.fireSound.stop()
             }
+            if (!this._player.jetpack.fireSound.isPlaying) this._player.jetpack.fireSound.play()
             const body = this._player.body as Phaser.Physics.Arcade.Body
             body.setVelocityY(-ASCEND_SPEED)
         } else {

@@ -180,7 +180,13 @@ class LoadingScene extends Phaser.Scene {
 
         this.load.audio('musicLevel', 'assets/BGM/Music_Level.mp3')
         this.load.audio('menuAmbiance', 'assets/BGM/menu_amb_lp.mp3')
+        this.load.audio('menuMusic', 'assets/BGM/Music_Menu.mp3')
         this.load.audio('windowSmash', 'assets/SFX/Environtment/window_smash.mp3')
+        this.load.audio('coinPickup1', 'assets/SFX/Obstacle/Coin/coin_pickup_1.mp3')
+        this.load.audio('coinPickup2', 'assets/SFX/Obstacle/Coin/coin_pickup_2.mp3')
+        this.load.audio('coinPickup3', 'assets/SFX/Obstacle/Coin/coin_pickup_3.mp3')
+        this.load.audio('playerBones', 'assets/SFX/Barry/Player_bones.mp3')
+
         this.load.audio('jetpackFire', 'assets/SFX/Jetpack/jetpack_fireLP.mp3')
     }
 
