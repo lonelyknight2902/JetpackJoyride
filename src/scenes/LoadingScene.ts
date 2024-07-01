@@ -6,10 +6,11 @@ class LoadingScene extends Phaser.Scene {
     }
     preload() {
         const background = this.add.image(0, 0, 'loadingScreen').setOrigin(0)
-        const progressBar = this.add.graphics()
         const progressBox = this.add.graphics()
+        const progressBar = this.add.graphics()
+
         progressBox.fillStyle(0x222222, 0.8)
-        progressBox.fillRect(SCREEN_WIDTH / 2 - 320 / 2, 270, 320, 50)
+        progressBox.fillRect(SCREEN_WIDTH / 2 - 1000 / 2, 600, 1000, 20)
         const width = this.cameras.main.width
         const height = this.cameras.main.height
         const loadingText = this.make.text({
@@ -47,7 +48,7 @@ class LoadingScene extends Phaser.Scene {
         this.load.on('progress', function (value: number) {
             progressBar.clear()
             progressBar.fillStyle(0xffffff, 1)
-            progressBar.fillRect(SCREEN_WIDTH / 2 - 320 / 2, 280, 300 * value, 30)
+            progressBar.fillRect(SCREEN_WIDTH / 2 - 1000 / 2 + 5, 605, 990 * value, 10)
             percentText.setText(parseInt(String(value * 100)) + '%')
         })
 
@@ -117,6 +118,11 @@ class LoadingScene extends Phaser.Scene {
             frameHeight: 64,
         })
 
+        this.load.spritesheet('bulletSplash', 'assets/Characters/Effects/bulletSplash_TVOS.png', {
+            frameWidth: 64,
+            frameHeight: 64,
+        })
+
         this.load.spritesheet('player-body', 'assets/Characters/Barry/defaultBody.png', {
             frameWidth: 32,
             frameHeight: 32,
@@ -146,15 +152,15 @@ class LoadingScene extends Phaser.Scene {
 
         this.load.spritesheet('orb', 'assets/Obstacles/Zapper/orbAnim.png', {
             frameWidth: 62,
-            frameHeight: 42
+            frameHeight: 42,
         })
         this.load.spritesheet('orbGlow', 'assets/Obstacles/Zapper/RegularZappers/glow.png', {
             frameWidth: 128,
-            frameHeight: 128
+            frameHeight: 128,
         })
         this.load.spritesheet('zapper', 'assets/Obstacles/Zapper/RegularZappers/zapEffects.png', {
             frameWidth: 256,
-            frameHeight: 117
+            frameHeight: 117,
         })
 
         this.load.spritesheet('missile', 'assets/Obstacles/Missile/missile.png', {
@@ -171,6 +177,11 @@ class LoadingScene extends Phaser.Scene {
             frameWidth: 64,
             frameHeight: 64,
         })
+
+        this.load.audio('musicLevel', 'assets/BGM/Music_Level.mp3')
+        this.load.audio('menuAmbiance', 'assets/BGM/menu_amb_lp.mp3')
+        this.load.audio('windowSmash', 'assets/SFX/Environtment/window_smash.mp3')
+        this.load.audio('jetpackFire', 'assets/SFX/Jetpack/jetpack_fireLP.mp3')
     }
 
     create() {
