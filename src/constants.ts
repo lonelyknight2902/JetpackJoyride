@@ -6,3 +6,5 @@ export const SCREEN_WIDTH = 1365
 export const SCREEN_HEIGHT = 768
 export const GAME_SPEED = 500
 export const TRANSITION_DELAY = 2000
+export const MIN_INTERVAL = 2000
+export const MAX_INTERVAL = 5000
