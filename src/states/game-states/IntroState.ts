@@ -18,10 +18,12 @@ class IntroState extends State {
         this.scene.cameras.main.shake(500, 0.01)
         this.scene.titleMap.displayHole()
         this.scene.titleMap.explode()
+        this.scene.windowSmash.play()
     }
 
     exit(): void {
         this.scene.titleMap.hideSmoke()
+        this.scene.levelMusic.play()
     }
 
     execute(time: number, delta: number): void {

@@ -28,7 +28,7 @@ class PlayScene extends Phaser.Scene {
     private map: Phaser.GameObjects.Container
     private mapList: Phaser.GameObjects.Container[] = []
     public initialMapList: Phaser.GameObjects.Container[] = []
-    private platforms: Phaser.Physics.Arcade.StaticGroup | undefined
+    public platforms: Phaser.Physics.Arcade.StaticGroup | undefined
     private shadow: Phaser.GameObjects.Image
     public title: Phaser.GameObjects.Container
     public scoreManager: ScoreManager
@@ -41,7 +41,9 @@ class PlayScene extends Phaser.Scene {
     public missile: Missile
     public zapperPool: ZapperPool
     public zapperSpawnEvent: Phaser.Time.TimerEvent
-    // public wallHole: Phaser.GameObjects.Image
+    public levelMusic: Phaser.Sound.BaseSound
+    public menuAmbiance: Phaser.Sound.BaseSound
+    public windowSmash: Phaser.Sound.BaseSound
     constructor() {
         super('PlayScene')
     }
@@ -80,21 +82,6 @@ class PlayScene extends Phaser.Scene {
         this.map.sendToBack(hallwayMap)
         this.map.sendToBack(labmap)
         this.initialMapList = [this.titleMap, hallwayMap, labmap]
-        // this.wallHole = this.add.image(32, 690, 'titleWallHole')
-        // this.wallHole.setOrigin(0.25, 1)
-        // this.wallHole.setScale(2)
-        // this.wallHole.setVisible(false)
-
-        // this.distanceText = this.add.text(16, 16, '0000m', {
-        //     fontSize: '64px',
-        //     color: '#FFF',
-        //     fontFamily: 'Arial',
-        // })
-        // this.coinText = this.add.text(16, 80, '000', {
-        //     fontSize: '32px',
-        //     color: '#FFF',
-        //     fontFamily: 'Arial',
-        // })
         this.scoreUI = new Score(this, 0, 0)
 
         this.title = new Title(this, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
@@ -115,7 +102,7 @@ class PlayScene extends Phaser.Scene {
             .refreshBody()
         this.platforms.setVisible(false)
         this.physics.add.collider(this._player, this.platforms)
-        this.missile = new Missile(this, 200, 200)
+        // this.missile = new Missile(this, 200, 200)
         this.zapperPool = new ZapperPool(this)
         this.zapperPool.initializeWithSize(10)
         this.zapperSpawnEvent = this.time.addEvent({
@@ -129,13 +116,15 @@ class PlayScene extends Phaser.Scene {
             loop: true,
             paused: true,
         })
-        // this.physics.add.collider(this._player.getBullet(), this.platforms)
         this.overlay = this.add.graphics()
         this.overlay.fillStyle(0x000000, 0.7)
         this.overlay.fillRect(0, 0, this.cameras.main.width, this.cameras.main.height)
         this.overlay.setVisible(false)
         this.resultUI = new Result(this, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 200)
         this.resultUI.setVisible(false)
+        this.levelMusic = this.sound.add('musicLevel', { loop: true })
+        this.menuAmbiance = this.sound.add('menuAmbiance', { loop: true })
+        this.windowSmash = this.sound.add('windowSmash')
         this.stateMachine = new StateMachine('start', {
             start: new StartState(this),
             intro: new IntroState(this),
@@ -148,19 +137,6 @@ class PlayScene extends Phaser.Scene {
 
     update(time: number, delta: number) {
         this.stateMachine.update(time, delta)
-
-        // this._player.getBullet().forEachAlive((bullet) => {
-        //     const particleBound = bullet.getBounds()
-        //     const platformsBound = this.platforms?.children.entries[0].body?.position.y
-        //     console.log(particleBound.bottom + this._player.y)
-        //     console.log(platformsBound)
-        //     if (platformsBound && particleBound.top + this._player.y > platformsBound) {
-        //         bullet.kill()
-        //     }
-        // }, this)
-        // if (this.backgroundLayer) {
-        //     this.backgroundLayer.x -= 0.5
-        // }
     }
 
     public getPlayer(): Player {

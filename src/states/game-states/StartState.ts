@@ -33,6 +33,7 @@ class StartState extends State {
         this.scene.getShadow().setVisible(false)
         this.scene.scoreUI.setVisible(false)
         this.scene.cameras.main.fadeIn(1000, 0, 0, 0)
+        this.scene.menuAmbiance.play()
     }
 
     exit(): void {
@@ -47,6 +48,7 @@ class StartState extends State {
         this.scene.titleMap.hideHole()
         this.scene.titleMap.getWallHole().setPosition(32, 690)
         this.scene.scoreUI.update()
+        this.scene.menuAmbiance.stop()
     }
 
     execute(time: number, delta: number): void {

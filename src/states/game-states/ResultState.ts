@@ -15,6 +15,7 @@ class ResultState extends State {
         this.scene.resultUI.setVisible(true)
         this.scene.overlay.setVisible(true)
         this.scene.physics.pause()
+        this.scene.levelMusic.stop()
     }
 
     exit(): void {
