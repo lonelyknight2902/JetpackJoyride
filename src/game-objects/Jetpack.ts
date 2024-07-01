@@ -1,4 +1,5 @@
 class Jetpack extends Phaser.GameObjects.Sprite {
+    public fireSound: Phaser.Sound.BaseSound
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string) {
         super(scene, x, y, texture)
         this.anims.create({
@@ -31,6 +32,7 @@ class Jetpack extends Phaser.GameObjects.Sprite {
             frameRate: 10,
             repeat: 0,
         })
+        this.fireSound = this.scene.sound.add('jetpackFire')
         // scene.add.existing(this)
     }
 }
