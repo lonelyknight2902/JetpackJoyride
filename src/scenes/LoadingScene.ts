@@ -71,6 +71,7 @@ class LoadingScene extends Phaser.Scene {
         this.load.image('hallway1', 'assets/Levels/Hallway1/hallway1FG_1_TVOS.png')
         this.load.image('hallway2', 'assets/Levels/Hallway1/hallway1FG_2_TVOS.png')
 
+        this.load.image('coinIcon', 'assets/Entities/coinSlow_TVOS.png')
         this.load.spritesheet('coin', 'assets/Entities/coin1_TVOS.png', {
             frameWidth: 32,
             frameHeight: 32,
@@ -83,14 +84,20 @@ class LoadingScene extends Phaser.Scene {
         this.load.tilemapTiledJSON('coinShape', 'assets/coinShape1.json')
 
         this.load.image('alarmLight', 'assets/Levels/Title/alarmLight_TVOS.png')
-        this.load.image('bestScreen', 'assets/Levels/Title/bestScreen_TVOS.png')
+        this.load.spritesheet('bestScreen', 'assets/Levels/Title/bestScreen_TVOS.png', {
+            frameWidth: 256,
+            frameHeight: 128,
+        })
         this.load.image('doNotTouchSign', 'assets/Levels/Title/doNotTouchSign_TVOS.png')
         // this.load.image('gramophone', 'assets/Levels/Title/gramophone_TVOS.png')
         this.load.image('lightEffect', 'assets/Levels/Title/lightEffect.png')
         this.load.image('lightEffect2', 'assets/Levels/Title/lightEffect2.png')
         this.load.image('table', 'assets/Levels/Title/table.png')
         this.load.image('titleLight', 'assets/Levels/Title/title_light_TVOS.png')
-        this.load.image('jetpackStand', 'assets/Levels/Title/Objects/JetpackStand.png')
+        this.load.spritesheet('jetpackStand', 'assets/Levels/Title/Objects/JetpackStand.png', {
+            frameWidth: 34,
+            frameHeight: 46,
+        })
         this.load.tilemapTiledJSON('titleMap', 'assets/titleMapBG.json')
 
         this.load.image('sectorNumbers', 'assets/Levels/Hallway1/sectorNumbers_TVOS.png')

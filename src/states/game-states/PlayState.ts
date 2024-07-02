@@ -14,7 +14,7 @@ class PlayState extends State {
 
     enter(): void {
         this.pauseKey = this.scene.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.ESC)
-        this.scene.zapperSpawnEvent.paused = false
+        // this.scene.zapperSpawnEvent.paused = false
     }
 
     exit(): void {
@@ -64,7 +64,7 @@ class PlayState extends State {
         // this.scene.coinText.setText(`${String(Math.floor(this.scene.scoreManager.getCoin())).padStart(3, '0')}`)
         this.scene.scoreUI.update()
         this.elapsedTime += delta
-        this.scene.zapperPool.update()
+        // this.scene.zapperPool.update()
     }
 }
 

@@ -19,6 +19,7 @@ class IntroState extends State {
         this.scene.titleMap.displayHole()
         this.scene.titleMap.explode()
         this.scene.windowSmash.play()
+        this.scene.titleMap.start()
     }
 
     exit(): void {

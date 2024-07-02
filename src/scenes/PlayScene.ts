@@ -104,19 +104,19 @@ class PlayScene extends Phaser.Scene {
         this.platforms.setVisible(false)
         this.physics.add.collider(this._player, this.platforms)
         // this.missile = new Missile(this, 200, 200)
-        this.zapperPool = new ZapperPool(this)
-        this.zapperPool.initializeWithSize(10)
-        this.zapperSpawnEvent = this.time.addEvent({
-            delay: Phaser.Math.Between(MIN_INTERVAL, MAX_INTERVAL),
-            callback: () => {
-                this.zapperPool.spawn(
-                    SCREEN_WIDTH + 200,
-                    Phaser.Math.Between(LOWER_BOUND, UPPER_BOUND)
-                )
-            },
-            loop: true,
-            paused: true,
-        })
+        // this.zapperPool = new ZapperPool(this)
+        // this.zapperPool.initializeWithSize(10)
+        // this.zapperSpawnEvent = this.time.addEvent({
+        //     delay: Phaser.Math.Between(MIN_INTERVAL, MAX_INTERVAL),
+        //     callback: () => {
+        //         this.zapperPool.spawn(
+        //             SCREEN_WIDTH + 200,
+        //             Phaser.Math.Between(LOWER_BOUND, UPPER_BOUND)
+        //         )
+        //     },
+        //     loop: true,
+        //     paused: true,
+        // })
         this.overlay = this.add.graphics()
         this.overlay.fillStyle(0x000000, 0.7)
         this.overlay.fillRect(0, 0, this.cameras.main.width, this.cameras.main.height)

@@ -1,4 +1,4 @@
-import { Coins } from "../game-objects"
+import { BestScreen, Coins, JetpackStand } from "../game-objects"
 
 class TitleMap extends Phaser.GameObjects.Container {
     private map: Phaser.Tilemaps.Tilemap
@@ -7,6 +7,8 @@ class TitleMap extends Phaser.GameObjects.Container {
     private wallHole: Phaser.GameObjects.Image
     private dust: Phaser.GameObjects.Particles.ParticleEmitter
     private smoke: Phaser.GameObjects.Particles.ParticleEmitter
+    private bestScreen: BestScreen
+    private jetpackStand: JetpackStand
     constructor(scene: Phaser.Scene, x: number, y: number) {
         super(scene, x, y)
         this.map = scene.make.tilemap({ key: 'titleMap' })
@@ -53,8 +55,14 @@ class TitleMap extends Phaser.GameObjects.Container {
         this.dust.setAngle(-90)
         // this.smoke.setAngle(-90)
         this.dust.stop()
+        this.bestScreen = new BestScreen(scene, 695, 490)
+        this.jetpackStand = new JetpackStand(scene, 200, 680)
+        this.jetpackStand.setOrigin(0, 1)
+        this.jetpackStand.setScale(2)
         // this.smoke.stop()
         // this.dust.stop()
+        this.add(this.bestScreen)
+        this.add(this.jetpackStand)
         this.add(this.dust)
         // this.add(this.smoke)
         scene.add.existing(this)
@@ -65,6 +73,14 @@ class TitleMap extends Phaser.GameObjects.Container {
             this.backgroundLayer.setPosition(this.x, this.y)
             // this.backgroundLayer.setDepth(10)
         }
+    }
+
+    start(): void {
+        this.jetpackStand.setFrame(1)
+    }
+
+    reset(): void {
+        this.jetpackStand.setFrame(0)
     }
 
     getBackgroundLayer(): Phaser.Tilemaps.TilemapLayer | null {

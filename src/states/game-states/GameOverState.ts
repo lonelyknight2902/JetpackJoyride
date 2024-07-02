@@ -11,7 +11,7 @@ class GameOverState extends State {
     }
 
     enter(): void {
-        this.scene.zapperSpawnEvent.paused = true
+        // this.scene.zapperSpawnEvent.paused = true
     }
 
     exit(): void {

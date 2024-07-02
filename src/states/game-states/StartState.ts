@@ -34,6 +34,7 @@ class StartState extends State {
         this.scene.scoreUI.setVisible(false)
         this.scene.cameras.main.fadeIn(1000, 0, 0, 0)
         this.scene.menuAmbiance.play()
+        this.scene.titleMap.reset()
     }
 
     exit(): void {
