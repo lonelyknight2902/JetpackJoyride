@@ -35,6 +35,9 @@ class StartState extends State {
         this.scene.cameras.main.fadeIn(1000, 0, 0, 0)
         this.scene.menuAmbiance.play()
         this.scene.titleMap.reset()
+        // this.scene.lasers.getLasers().forEach((laser) => {
+        //     laser.stateMachine.transition('deactivate')
+        // })
     }
 
     exit(): void {

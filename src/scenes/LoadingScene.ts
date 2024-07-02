@@ -170,6 +170,23 @@ class LoadingScene extends Phaser.Scene {
             frameHeight: 117,
         })
 
+        this.load.spritesheet('laser', 'assets/Obstacles/Laser/laser.png', {
+            frameWidth: 128,
+            frameHeight: 128,
+        })
+
+        this.load.spritesheet('laserEnergy', 'assets/Obstacles/Laser/laserEnergy.png', {
+            frameWidth: 256,
+            frameHeight: 256,
+        })
+
+        this.load.spritesheet('laserPower', 'assets/Obstacles/Laser/laserPower.png', {
+            frameWidth: 64,
+            frameHeight: 64,
+        })
+
+        this.load.image('laserWarning', 'assets/Obstacles/Laser/laserWarning.png')
+
         this.load.spritesheet('missile', 'assets/Obstacles/Missile/missile.png', {
             frameWidth: 32,
             frameHeight: 32,

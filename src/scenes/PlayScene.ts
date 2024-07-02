@@ -6,7 +6,7 @@ import {
     SCREEN_WIDTH,
     UPPER_BOUND,
 } from '../constants'
-import { Missile, Player, Title } from '../game-objects'
+import { Laser, LasersContainer, Missile, Player, Title } from '../game-objects'
 import { ScoreManager } from '../manager'
 import { HallwayMap, LabMap, TitleMap } from '../maps'
 import { ZapperPool } from '../object-pools'
@@ -45,6 +45,7 @@ class PlayScene extends Phaser.Scene {
     public menuMusic: Phaser.Sound.BaseSound
     public menuAmbiance: Phaser.Sound.BaseSound
     public windowSmash: Phaser.Sound.BaseSound
+    public lasers: LasersContainer
     constructor() {
         super('PlayScene')
     }
@@ -127,6 +128,7 @@ class PlayScene extends Phaser.Scene {
         this.menuAmbiance = this.sound.add('menuAmbiance', { loop: true })
         this.windowSmash = this.sound.add('windowSmash')
         this.menuMusic = this.sound.add('menuMusic', { loop: true })
+        this.lasers = new LasersContainer(this, 0, UPPER_BOUND)
         this.stateMachine = new StateMachine('start', {
             start: new StartState(this),
             intro: new IntroState(this),
