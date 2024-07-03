@@ -1,6 +1,7 @@
 import { LOWER_BOUND, UPPER_BOUND } from '../constants'
 import { Coins, Player, Zapper } from '../game-objects'
 import { ScoreManager } from '../manager'
+import { PlayScene } from '../scenes'
 
 class HallwayMap extends Phaser.GameObjects.Container {
     private map: Phaser.Tilemaps.Tilemap
@@ -9,7 +10,7 @@ class HallwayMap extends Phaser.GameObjects.Container {
     private scoreManager: ScoreManager
     private coinPickupSound: Phaser.Sound.BaseSound[]
     private currentSound = 0
-    constructor(scene: Phaser.Scene, x: number, y: number) {
+    constructor(scene: PlayScene, x: number, y: number) {
         super(scene, x, y)
         this.map = scene.make.tilemap({ key: 'hallwayMap' })
         this.width = this.map.widthInPixels
@@ -25,10 +26,41 @@ class HallwayMap extends Phaser.GameObjects.Container {
                 this.backgroundLayer.setPosition(this.x, this.y)
             }
         }
+        const player = Player.getInstance(scene, 200, 200)
         const coinLayer = this.map.createLayer(0, 'coinLayer', 0, 0)
         const zapperLayer = this.map.createLayer(1, 'zapperLayer', 0, 0)
         const zapperSpawnPoint = this.map.filterObjects('Zapper', (obj) =>
             obj.name.includes('Zapper')
+        )
+        const missileSpawnPoint = this.map.createFromObjects('Trigger', {
+            id: 75,
+        })
+        missileSpawnPoint.forEach((missile) => {
+            if (missile) {
+                scene.physics.add.existing(missile)
+                scene.physics.world.enable(missile)
+                const body = missile.body as Phaser.Physics.Arcade.Body
+                body.setAllowGravity(false)
+            }
+            const missileSprite = missile as Phaser.GameObjects.Sprite
+            missileSprite.setVisible(false)
+        })
+        this.add(missileSpawnPoint)
+        scene.physics.add.overlap(
+            missileSpawnPoint,
+            player,
+            (missile: any, player: any) => {
+                const missilesContainer = scene.missiles
+                console.log('Missile Attack')
+                console.log('Missile state: ', missilesContainer.state)
+                if (missilesContainer.state == 'idle') {
+                    const randomNumber = Phaser.Math.Between(3, 6)
+                    missilesContainer.launch(randomNumber)
+                    console.log('Missile is Attacking')
+                }
+            },
+            undefined,
+            this
         )
         zapperSpawnPoint?.forEach((zapper) => {
             console.log(zapper)
@@ -54,7 +86,6 @@ class HallwayMap extends Phaser.GameObjects.Container {
         })
 
         this.add(this.coins)
-        const player = Player.getInstance(scene, 200, 200)
         scene.physics.add.overlap(player, this.coins, this.collectCoin, undefined, this)
         scene.add.existing(this)
         this.coinPickupSound = [

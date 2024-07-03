@@ -11,24 +11,25 @@ class StopState extends State {
         this.scene = scene
     }
     enter(): void {
-        console.log('StopState')
+        console.log('Laser StopState')
         this.laser.laserPodLeft.play('laser-idle')
         this.laser.laserPodRight.play('laser-idle')
         this.laser.laserBeam.play('laser-beam-off')
         this.laser.laserFlashLeft.play('laser-off')
         this.laser.laserFlashRight.play('laser-off')
+        this.laser.laserBeam.setActive(false)
     }
 
     exit(): void {
-        console.log('StopState')
+        return
     }
 
     execute(time: number, delta: number): void {
         if (this.elapsedTime >= 1000) {
             this.stateMachine.transition('exit')
+            this.elapsedTime = 0
         }
         this.elapsedTime += delta
-        console.log('StopState')
     }
 }
 

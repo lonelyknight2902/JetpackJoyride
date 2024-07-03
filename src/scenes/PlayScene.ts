@@ -6,7 +6,7 @@ import {
     SCREEN_WIDTH,
     UPPER_BOUND,
 } from '../constants'
-import { Laser, LasersContainer, Missile, Player, Title } from '../game-objects'
+import { Laser, LasersContainer, Missile, MissilesContainer, Player, Title } from '../game-objects'
 import { ScoreManager } from '../manager'
 import { HallwayMap, LabMap, TitleMap } from '../maps'
 import { ZapperPool } from '../object-pools'
@@ -46,6 +46,7 @@ class PlayScene extends Phaser.Scene {
     public menuAmbiance: Phaser.Sound.BaseSound
     public windowSmash: Phaser.Sound.BaseSound
     public lasers: LasersContainer
+    public missiles: MissilesContainer
     constructor() {
         super('PlayScene')
     }
@@ -118,6 +119,8 @@ class PlayScene extends Phaser.Scene {
         //     loop: true,
         //     paused: true,
         // })
+        this.lasers = new LasersContainer(this, 0, UPPER_BOUND)
+        this.missiles = new MissilesContainer(this, 0, UPPER_BOUND)
         this.overlay = this.add.graphics()
         this.overlay.fillStyle(0x000000, 0.7)
         this.overlay.fillRect(0, 0, this.cameras.main.width, this.cameras.main.height)
@@ -128,7 +131,13 @@ class PlayScene extends Phaser.Scene {
         this.menuAmbiance = this.sound.add('menuAmbiance', { loop: true })
         this.windowSmash = this.sound.add('windowSmash')
         this.menuMusic = this.sound.add('menuMusic', { loop: true })
-        this.lasers = new LasersContainer(this, 0, UPPER_BOUND)
+        // this.time.addEvent({
+        //     delay: 10000,
+        //     callback: () => {
+        //         this.missiles.launch(2)
+        //     },
+        //     loop: true,
+        // })
         this.stateMachine = new StateMachine('start', {
             start: new StartState(this),
             intro: new IntroState(this),

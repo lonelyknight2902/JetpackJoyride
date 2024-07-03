@@ -364,7 +364,7 @@
          "starty":0,
          "type":"tilelayer",
          "visible":true,
-         "width":160,
+         "width":128,
          "x":0,
          "y":0
         }, 
@@ -1172,9 +1172,31 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":6,
+         "name":"Trigger",
+         "objects":[
+                {
+                 "height":576,
+                 "id":75,
+                 "name":"missile",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":2368,
+                 "y":96
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":6,
- "nextobjectid":73,
+ "nextlayerid":7,
+ "nextobjectid":76,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",

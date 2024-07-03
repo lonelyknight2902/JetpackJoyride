@@ -66,6 +66,7 @@ class PlayState extends State {
         this.elapsedTime += delta
         // this.scene.zapperPool.update()
         this.scene.lasers.update(time, delta)
+        this.scene.missiles.update(time, delta)
     }
 }
 

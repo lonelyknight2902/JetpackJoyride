@@ -13,3 +13,4 @@ export const FIRE_RATE = 30
 export const MIN_ANGLE = 80
 export const MAX_ANGLE = 100
 export const ANGLE_STEP = 5
+export const MISSILE_SPEED = 1000

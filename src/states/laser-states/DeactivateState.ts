@@ -12,6 +12,7 @@ class DeactivateState extends State {
         this.scene = scene
     }
     enter(): void {
+        console.log('Laser DeactivateState')
         this.laser.laserPodLeft.x = -100
         this.laser.laserPodRight.x = SCREEN_WIDTH + 100
         this.laser.laserBeam.setVisible(false)
@@ -20,6 +21,7 @@ class DeactivateState extends State {
         this.laser.laserFlashLeft.setVisible(false)
         this.laser.laserEnergyRight.setVisible(false)
         this.laser.laserFlashRight.setVisible(false)
+        this.laser.laserWarning.setVisible(false)
     }
 
     exit(): void {
@@ -28,7 +30,6 @@ class DeactivateState extends State {
 
     execute(time: number, delta: number): void {
         // this.elapsedTime += delta
-        console.log('DeactivateState')
     }
 }
 

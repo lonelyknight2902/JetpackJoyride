@@ -11,9 +11,10 @@ class ChargingState extends State {
         this.scene = scene
     }
     enter(): void {
-        console.log('ChargingState')
+        console.log('Laser ChargingState')
         this.laser.laserEnergyLeft.setVisible(true)
         this.laser.laserEnergyRight.setVisible(true)
+        this.laser.laserWarning.setVisible(true)
         this.laser.laserPodLeft.play('laser-charge')
         this.laser.laserPodRight.play('laser-charge')
         this.laser.laserEnergyLeft.play('laser-ready')
@@ -21,15 +22,15 @@ class ChargingState extends State {
     }
 
     exit(): void {
-        console.log('ChargingState')
+        return
     }
 
     execute(time: number, delta: number): void {
+        this.elapsedTime += delta
         if (this.elapsedTime >= 1000) {
             this.stateMachine.transition('firing')
+            this.elapsedTime = 0
         }
-        this.elapsedTime += delta
-        console.log('ChargingState')
     }
 }
 

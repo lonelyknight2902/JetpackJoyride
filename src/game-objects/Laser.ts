@@ -52,7 +52,7 @@ class Laser extends Phaser.GameObjects.Container {
         this.laserFlashRight.setOrigin(1, 0)
         this.laserWarning = scene.add.image(SCREEN_WIDTH / 2, 0, 'laserWarning')
         this.laserWarning.setOrigin(0.5, 1)
-        this.laserWarning.setScale(20, 0.1)
+        this.laserWarning.setScale(5, 0.1)
         this.add(this.laserBeam)
         this.add(this.laserPodLeft)
         this.add(this.laserPodRight)
@@ -61,13 +61,14 @@ class Laser extends Phaser.GameObjects.Container {
         this.add(this.laserEnergyRight)
         this.add(this.laserFlashRight)
         this.add(this.laserWarning)
+        this.laserWarning.setVisible(false)
         this.laserBeam.setVisible(false)
         this.laserEnergyLeft.setVisible(false)
         this.laserFlashLeft.setVisible(false)
         this.laserEnergyRight.setVisible(false)
         this.laserFlashRight.setVisible(false)
         const player = Player.getInstance(scene, 200, 200)
-        this.stateMachine = new StateMachine('ready', {
+        this.stateMachine = new StateMachine('deactivate', {
             ready: new ReadyState(this, scene),
             charging: new ChargingState(this, scene),
             firing: new FiringState(this, scene),

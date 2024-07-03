@@ -12,7 +12,7 @@ class ReadyState extends State {
         this.scene = scene
     }
     enter(): void {
-        console.log('ReadyState')
+        console.log('Laser ReadyState')
         this.laser.laserPodLeft.play('laser-idle')
         this.laser.laserPodRight.play('laser-idle')
         this.scene.tweens.add({
@@ -25,18 +25,23 @@ class ReadyState extends State {
             x: SCREEN_WIDTH,
             duration: 1000,
         })
+        this.laser.laserWarning.setVisible(false)
+        this.laser.laserPodLeft.x = -100
+        this.laser.laserPodRight.x = SCREEN_WIDTH + 100
+        this.laser.laserBeam.setVisible(false)
+        this.laser.laserBeam.setActive(false)
     }
 
     exit(): void {
-        console.log('ReadyState')
+        return
     }
 
     execute(time: number, delta: number): void {
+        this.elapsedTime += delta
         if (this.elapsedTime >= 1000) {
             this.stateMachine.transition('charging')
-        } 
-        this.elapsedTime += delta
-        console.log('ReadyState')
+            this.elapsedTime = 0
+        }
     }
 }
 

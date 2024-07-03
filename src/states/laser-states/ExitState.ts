@@ -12,7 +12,7 @@ class ExitState extends State {
         this.scene = scene
     }
     enter(): void {
-        console.log('ExitState')
+        console.log('Laser ExitState')
         this.scene.tweens.add({
             targets: this.laser.laserPodLeft,
             x: -100,
@@ -26,15 +26,15 @@ class ExitState extends State {
     }
 
     exit(): void {
-        console.log('ExitState')
+        return
     }
 
     execute(time: number, delta: number): void {
         if (this.elapsedTime >= 1000) {
             this.stateMachine.transition('deactivate')
+            this.elapsedTime = 0
         }
         this.elapsedTime += delta
-        console.log('ExitState')
     }
 }
 

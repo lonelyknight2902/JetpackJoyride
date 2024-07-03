@@ -11,7 +11,7 @@ class FiringState extends State {
         this.scene = scene
     }
     enter(): void {
-        console.log('FiringState')
+        console.log('Laser FiringState')
         this.laser.laserPodLeft.play('laser-fire')
         this.laser.laserPodRight.play('laser-fire')
         this.laser.laserEnergyLeft.play('laser-done')
@@ -21,19 +21,22 @@ class FiringState extends State {
         this.laser.laserFlashLeft.play('laser-on')
         this.laser.laserFlashRight.play('laser-on')
         this.laser.laserBeam.setVisible(true)
+        this.laser.laserBeam.setActive(true)
+        this.laser.laserWarning.setVisible(false)
         this.laser.laserBeam.play('laser-beam-on')
     }
 
     exit(): void {
-        console.log('FiringState')
+        this.laser.laserBeam.setVisible(false)
+        this.laser.laserBeam.setActive(false)
     }
 
     execute(time: number, delta: number): void {
+        this.elapsedTime += delta
         if (this.elapsedTime >= 2000) {
             this.stateMachine.transition('stop')
+            this.elapsedTime = 0
         }
-        this.elapsedTime += delta
-        console.log('FiringState')
     }
 }
 
