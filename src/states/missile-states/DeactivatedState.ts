@@ -20,6 +20,9 @@ class DeactivatedState extends State {
         body.setVelocityX(0)
         this.missileContainer.missile.setPosition(50, 0)
         this.missileContainer.state = 'idle'
+        this.missileContainer.missileWarningAudio.stop()
+        this.missileContainer.missileExplodeAudio.stop()
+        this.missileContainer.missileLaunchAudio.stop()
     }
     exit(): void {
         console.log('DeactivatedState exit')

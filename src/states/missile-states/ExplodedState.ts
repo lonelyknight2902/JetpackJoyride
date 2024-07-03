@@ -16,10 +16,12 @@ class ExplodedState extends State {
         this.missileContainer.missile.explode()
         const body = this.missileContainer.missile.body as Phaser.Physics.Arcade.Body
         body.setVelocityX(0)
+        this.missileContainer.missileExplodeAudio.play()
     }
 
     exit(): void {
         console.log('ExplodedState exit')
+        this.missileContainer.missileExplodeAudio.stop()
     }
 
     execute(time: number, delta: number): void {

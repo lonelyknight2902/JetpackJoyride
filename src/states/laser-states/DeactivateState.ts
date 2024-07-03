@@ -22,6 +22,10 @@ class DeactivateState extends State {
         this.laser.laserEnergyRight.setVisible(false)
         this.laser.laserFlashRight.setVisible(false)
         this.laser.laserWarning.setVisible(false)
+        this.laser.laserWarningAudio.stop()
+        this.laser.laserStartAudio.stop()
+        this.laser.laserFireAudio.stop()
+        this.laser.laserStopAudio.stop()
     }
 
     exit(): void {

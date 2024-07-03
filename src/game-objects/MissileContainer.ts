@@ -11,6 +11,9 @@ class MissileContainer extends Phaser.GameObjects.Container {
     public missile: Missile
     public duration = 2000
     public stateMachine: StateMachine
+    public missileWarningAudio: Phaser.Sound.BaseSound
+    public missileLaunchAudio: Phaser.Sound.BaseSound
+    public missileExplodeAudio: Phaser.Sound.BaseSound
     constructor(scene: PlayScene, x: number, y: number) {
         super(scene, x, y)
         this.scene.add.existing(this)
@@ -22,6 +25,9 @@ class MissileContainer extends Phaser.GameObjects.Container {
         this.missile.setVisible(false)
         this.missileAlert.setVisible(false)
         const player = Player.getInstance(scene, 200, 200)
+        this.missileWarningAudio = scene.sound.add('missileWarning', { loop: true })
+        this.missileLaunchAudio = scene.sound.add('missileLaunch')
+        this.missileExplodeAudio = scene.sound.add('missileExplode')
         this.scene.physics.add.overlap(this.missile, player, (missile: any, player: any) => {
             const scenePlayer = player as Player
             console.log('Boooooooooom')

@@ -214,6 +214,13 @@ class LoadingScene extends Phaser.Scene {
         this.load.audio('coinPickup1', 'assets/SFX/Obstacle/Coin/coin_pickup_1.mp3')
         this.load.audio('coinPickup2', 'assets/SFX/Obstacle/Coin/coin_pickup_2.mp3')
         this.load.audio('coinPickup3', 'assets/SFX/Obstacle/Coin/coin_pickup_3.mp3')
+        this.load.audio('laserWarning', 'assets/SFX/Obstacle/Laser/laser_warning.mp3')
+        this.load.audio('laserStart', 'assets/SFX/Obstacle/Laser/laser_start.mp3')
+        this.load.audio('laserFire', 'assets/SFX/Obstacle/Laser/laser_fire_lp.mp3')
+        this.load.audio('laserStop', 'assets/SFX/Obstacle/Laser/laser_stop.mp3')
+        this.load.audio('missileWarning', 'assets/SFX/Obstacle/Missile/missile_warning.mp3')
+        this.load.audio('missileLaunch', 'assets/SFX/Obstacle/Missile/missile_launch.mp3')
+        this.load.audio('missileExplode', 'assets/SFX/Obstacle/Missile/rocket_explode_1.mp3')
         this.load.audio('playerBones', 'assets/SFX/Barry/Player_bones.mp3')
 
         this.load.audio('jetpackFire', 'assets/SFX/Jetpack/jetpack_fireLP.mp3')

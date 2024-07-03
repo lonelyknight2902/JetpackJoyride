@@ -17,6 +17,7 @@ class StopState extends State {
         this.laser.laserBeam.play('laser-beam-off')
         this.laser.laserFlashLeft.play('laser-off')
         this.laser.laserFlashRight.play('laser-off')
+        this.laser.laserStopAudio.play()
     }
 
     exit(): void {

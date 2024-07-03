@@ -2,6 +2,7 @@ import { BulletPool } from '../object-pools'
 import { StateMachine } from '../states'
 import {
     AscendState,
+    BurnState,
     DescendState,
     DieState,
     RunState,
@@ -66,6 +67,7 @@ class Player extends Phaser.GameObjects.Container {
             'player-descend': new DescendState(this, scene),
             'player-touchdown': new TouchDownState(this, scene),
             'player-zap': new ZapState(this, scene),
+            'player-burn': new BurnState(this, scene),
             'player-die': new DieState(this, scene),
         })
         scene.add.existing(this)

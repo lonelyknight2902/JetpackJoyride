@@ -19,9 +19,11 @@ class LaunchState extends State {
         this.missileContainer.missileAlert.setVisible(false)
         const body = this.missileContainer.missile.body as Phaser.Physics.Arcade.Body
         body.setVelocityX(-MISSILE_SPEED)
+        this.missileContainer.missileLaunchAudio.play()
     }
     exit(): void {
         console.log('LaunchState exit')
+        this.missileContainer.missileLaunchAudio.stop()
     }
     execute(time: number, delta: number): void {
         console.log('LaunchState execute')

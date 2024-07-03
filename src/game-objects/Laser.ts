@@ -25,6 +25,10 @@ class Laser extends Phaser.GameObjects.Container {
     public laserFlashRight: Phaser.GameObjects.Sprite
     public laserWarning: Phaser.GameObjects.Image
     public stateMachine: StateMachine
+    public laserWarningAudio: Phaser.Sound.BaseSound
+    public laserStartAudio: Phaser.Sound.BaseSound
+    public laserFireAudio: Phaser.Sound.BaseSound
+    public laserStopAudio: Phaser.Sound.BaseSound
     constructor(scene: Phaser.Scene, x: number, y: number) {
         super(scene, x, y)
         this.scene.add.existing(this)
@@ -65,6 +69,10 @@ class Laser extends Phaser.GameObjects.Container {
         this.add(this.laserFlashLeft)
         this.add(this.laserEnergyRight)
         this.add(this.laserFlashRight)
+        this.laserWarningAudio = scene.sound.add('laserWarning')
+        this.laserStartAudio = scene.sound.add('laserStart')
+        this.laserFireAudio = scene.sound.add('laserFire', { loop: true })
+        this.laserStopAudio = scene.sound.add('laserStop')
         this.laserWarning.setVisible(false)
         this.laserBeam.setVisible(false)
         this.laserEnergyLeft.setVisible(false)
@@ -83,7 +91,7 @@ class Laser extends Phaser.GameObjects.Container {
         this.scene.physics.add.overlap(this.laserBeam, player, (laserBeam: any, player: any) => {
             const p = player as Player
             if (p.getCurrentState() !== 'player-die' && this.stateMachine.getState() === 'firing') {
-                p.stateMachine.transition('player-die')
+                p.stateMachine.transition('player-burn')
             }
         })
     }

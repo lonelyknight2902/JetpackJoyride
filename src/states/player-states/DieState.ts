@@ -1,5 +1,5 @@
-import { Player } from "../../game-objects"
-import State from "../../types/State"
+import { Player } from '../../game-objects'
+import State from '../../types/State'
 
 class DieState extends State {
     private _player: Player
@@ -18,7 +18,9 @@ class DieState extends State {
         const body = this._player.body as Phaser.Physics.Arcade.Body
         body?.setSize(38, 20)
         body.setOffset(-20, -30)
-        // this._scene.
+        this._player.jetpack.setVisible(false)
+        this._player.getShell().stop()
+        this._player.getShell().setVisible(false)
     }
 
     exit(): void {

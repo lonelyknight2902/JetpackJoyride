@@ -24,10 +24,12 @@ class FiringState extends State {
         this.laser.laserBeam.setActive(true)
         this.laser.laserWarning.setVisible(false)
         this.laser.laserBeam.play('laser-beam-on')
+        this.laser.laserStartAudio.play()
+        this.laser.laserFireAudio.play()
     }
 
     exit(): void {
-        return
+        this.laser.laserFireAudio.stop()
     }
 
     execute(time: number, delta: number): void {

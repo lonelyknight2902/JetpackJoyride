@@ -27,7 +27,13 @@ class PlayerBody extends Phaser.GameObjects.Sprite {
         })
         this.anims.create({
             key: 'player-zap',
-            frames: this.anims.generateFrameNumbers('player-body', { frames: [16, 17, 18, 19, 20, 21, 22, 23] }),
+            frames: this.anims.generateFrameNumbers('player-body', { frames: [16, 17, 18, 19] }),
+            frameRate: 60,
+            repeat: 0,
+        })
+        this.anims.create({
+            key: 'player-burn',
+            frames: this.anims.generateFrameNumbers('player-body', { frames: [20, 21, 22, 23] }),
             frameRate: 60,
             repeat: 0,
         })

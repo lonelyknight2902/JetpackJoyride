@@ -21,6 +21,9 @@ class AlertState extends State {
         this.missileContainer.missile.setPosition(50, 0)
         this.missileContainer.missileAlert.play('missileAlert')
         this.missileContainer.state = 'play'
+        this.missileContainer.missileWarningAudio.play({
+            rate: 1.0
+        })
     }
 
     exit(): void {

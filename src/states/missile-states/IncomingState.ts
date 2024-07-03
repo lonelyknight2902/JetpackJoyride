@@ -16,11 +16,15 @@ class IncomingState extends State {
     enter(): void {
         console.log('IncomingState')
         this.missileContainer.missileAlert.play('missileIncoming')
+        this.missileContainer.missileWarningAudio.play({
+            rate: 2.0
+        })
     }
 
     exit(): void {
         console.log('IncomingState exit')
         this.missileContainer.missileAlert.setVisible(false)
+        this.missileContainer.missileWarningAudio.stop()
     }
 
     execute(time: number, delta: number): void {

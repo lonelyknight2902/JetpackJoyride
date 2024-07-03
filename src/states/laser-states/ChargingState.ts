@@ -19,9 +19,11 @@ class ChargingState extends State {
         this.laser.laserPodRight.play('laser-charge')
         this.laser.laserEnergyLeft.play('laser-ready')
         this.laser.laserEnergyRight.play('laser-ready')
+        this.laser.laserWarningAudio.play()
     }
 
     exit(): void {
+        this.laser.laserWarningAudio.stop()
         return
     }
 
