@@ -1,5 +1,5 @@
 export const ASCEND_SPEED = 500
-export const GAME_GRAVITY = 1000
+export const GAME_GRAVITY = 2000
 export const UPPER_BOUND = 100
 export const LOWER_BOUND = 660
 export const SCREEN_WIDTH = 1365
@@ -8,8 +8,8 @@ export const GAME_SPEED = 500
 export const TRANSITION_DELAY = 2000
 export const MIN_INTERVAL = 2000
 export const MAX_INTERVAL = 5000
-export const BULLET_VELOCITY = 2500
-export const FIRE_RATE = 30
+export const BULLET_VELOCITY = 2000
+export const FIRE_RATE = 20
 export const MIN_ANGLE = 80
 export const MAX_ANGLE = 100
 export const ANGLE_STEP = 5

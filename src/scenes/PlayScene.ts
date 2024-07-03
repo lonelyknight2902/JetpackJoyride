@@ -85,8 +85,6 @@ class PlayScene extends Phaser.Scene {
         this.map.sendToBack(hallwayMap)
         this.map.sendToBack(labmap)
         this.initialMapList = [this.titleMap, hallwayMap, labmap]
-        this.scoreUI = new Score(this, 0, 0)
-
         this.title = new Title(this, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
         this.title.setScale(0.8)
         this._player = Player.getInstance(this, 200, 200)
@@ -121,6 +119,7 @@ class PlayScene extends Phaser.Scene {
         // })
         this.lasers = new LasersContainer(this, 0, UPPER_BOUND)
         this.missiles = new MissilesContainer(this, 0, UPPER_BOUND)
+        this.scoreUI = new Score(this, 0, 0)
         this.overlay = this.add.graphics()
         this.overlay.fillStyle(0x000000, 0.7)
         this.overlay.fillRect(0, 0, this.cameras.main.width, this.cameras.main.height)

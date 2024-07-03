@@ -27,8 +27,7 @@ class FiringState extends State {
     }
 
     exit(): void {
-        this.laser.laserBeam.setVisible(false)
-        this.laser.laserBeam.setActive(false)
+        return
     }
 
     execute(time: number, delta: number): void {

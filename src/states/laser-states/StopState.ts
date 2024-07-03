@@ -17,11 +17,11 @@ class StopState extends State {
         this.laser.laserBeam.play('laser-beam-off')
         this.laser.laserFlashLeft.play('laser-off')
         this.laser.laserFlashRight.play('laser-off')
-        this.laser.laserBeam.setActive(false)
     }
 
     exit(): void {
-        return
+        this.laser.laserBeam.setActive(false)
+        this.laser.laserBeam.setVisible(false)
     }
 
     execute(time: number, delta: number): void {

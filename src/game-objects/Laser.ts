@@ -50,9 +50,14 @@ class Laser extends Phaser.GameObjects.Container {
         this.laserEnergyRight.setOrigin(0.5, 0.5)
         this.laserFlashLeft.setOrigin(0, 0)
         this.laserFlashRight.setOrigin(1, 0)
-        this.laserWarning = scene.add.image(SCREEN_WIDTH / 2, 0, 'laserWarning')
-        this.laserWarning.setOrigin(0.5, 1)
+        this.laserWarning = scene.add.image(
+            SCREEN_WIDTH / 2,
+            this.laserPodLeft.height / 2 - 30,
+            'laserWarning'
+        )
+        this.laserWarning.setOrigin(0.5, 0.5)
         this.laserWarning.setScale(5, 0.1)
+        this.add(this.laserWarning)
         this.add(this.laserBeam)
         this.add(this.laserPodLeft)
         this.add(this.laserPodRight)
@@ -60,7 +65,6 @@ class Laser extends Phaser.GameObjects.Container {
         this.add(this.laserFlashLeft)
         this.add(this.laserEnergyRight)
         this.add(this.laserFlashRight)
-        this.add(this.laserWarning)
         this.laserWarning.setVisible(false)
         this.laserBeam.setVisible(false)
         this.laserEnergyLeft.setVisible(false)
