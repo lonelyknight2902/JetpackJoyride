@@ -68,7 +68,13 @@ class HallwayMap extends Phaser.GameObjects.Container {
             if (zapper) {
                 const x = zapper.x ? zapper.x : 0
                 const y = zapper.y ? zapper.y : 0
-                const zapperObject = new Zapper(scene, x, y)
+                const type = Phaser.Math.Between(0, 1)
+                let zapperObject: Zapper
+                if (type == 0) {
+                    zapperObject = new Zapper(scene, x, y)
+                } else {
+                    zapperObject = new RotatingZapper(scene, x, y)
+                }
                 this.zappers.push(zapperObject)
                 this.add(zapperObject)
             }
