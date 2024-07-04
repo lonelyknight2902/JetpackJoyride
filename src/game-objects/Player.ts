@@ -13,7 +13,7 @@ import BulletFlash from './BulletFlash'
 import Jetpack from './Jetpack'
 import PlayerBody from './PlayerBody'
 import PlayerHead from './PlayerHead'
-
+import SAT from 'sat'
 class Player extends Phaser.GameObjects.Container {
     private _stateMachine: StateMachine
     private _playerBody: PlayerBody
@@ -27,6 +27,7 @@ class Player extends Phaser.GameObjects.Container {
     public playerBoneAudio: Phaser.Sound.BaseSound
     // private _renderTexture: Phaser.GameObjects.RenderTexture
     // private _container: Phaser.GameObjects.Container
+    public polygon: SAT.Polygon
     constructor(scene: Phaser.Scene, x: number, y: number) {
         // texture: string, renderTexture: Phaser.GameObjects.RenderTexture
         super(scene, x, y)
@@ -53,6 +54,7 @@ class Player extends Phaser.GameObjects.Container {
         this._bulletFlash.setVisible(false)
         this.bulletPool = new BulletPool(scene)
         this.bulletPool.initializeWithSize(10)
+        this.polygon = new SAT.Box(new SAT.Vector(this.x, this.y), 32, 64).toPolygon()
         // this._container = new Phaser.GameObjects.Container(scene, x, y, [this._playerBody, this._playerHead])
         // let body = this._container.body as Phaser.Physics.Arcade.Body
         // this._container.setSize(32, 64)
@@ -93,6 +95,8 @@ class Player extends Phaser.GameObjects.Container {
         // this.y = this._playerBody.y
         this._stateMachine.update(time, delta)
         this.bulletPool.update()
+        this.polygon.pos.x = this.x
+        this.polygon.pos.y = this.y
         // this.shadow.setPosition(14, (LOWER_BOUND - this.y) / this.scale)
         // console.log(this.shadow.y)
         // console.log(LOWER_BOUND - this.y)

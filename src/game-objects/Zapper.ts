@@ -1,4 +1,5 @@
 import Player from './Player'
+import SAT from 'sat'
 
 class Zapper extends Phaser.GameObjects.Container {
     private orb1: Phaser.GameObjects.Sprite
@@ -6,6 +7,7 @@ class Zapper extends Phaser.GameObjects.Container {
     private glow1: Phaser.GameObjects.Sprite
     private glow2: Phaser.GameObjects.Sprite
     private zapper: Phaser.GameObjects.Sprite
+    private polygon: SAT.Polygon
     constructor(scene: Phaser.Scene, x: number, y: number) {
         super(scene, x, y)
         this.orb1 = scene.add.sprite(0, 0, 'orb')
@@ -64,12 +66,18 @@ class Zapper extends Phaser.GameObjects.Container {
         this.add(this.glow2)
         this.add(this.orb1)
         this.add(this.orb2)
-
+        this.polygon = new SAT.Box(new SAT.Vector(this.x, this.y), 60, 240).toPolygon()
+        this.setRotation(Math.PI / 3)
+        const angle = this.rotation
+        this.polygon.setAngle(angle)
         scene.physics.add.existing(this)
         const body = this.body as Phaser.Physics.Arcade.Body
         body.setAllowGravity(false)
-        body.setSize(60, 240)
-        body.setOffset(-40, -20)
+        // body.setSize(60, 240)
+        const bounds = this.getBounds()
+        body.setSize(bounds.width, bounds.height)
+        // body.setOffset(-40, -20)
+        body.setOffset(bounds.x - this.x, bounds.y - this.y)
         scene.add.existing(this)
         const player = Player.getInstance(scene, 500, 200)
         scene.physics.add.overlap(
@@ -80,9 +88,19 @@ class Zapper extends Phaser.GameObjects.Container {
                 if (player.stateMachine.state === 'player-zap') return
                 player.stateMachine.transition('player-zap')
             },
-            undefined,
+            () => {
+                const response = new SAT.Response()
+                return SAT.testPolygonPolygon(player.polygon, this.polygon, response)
+            },
             this
         )
+    }
+
+    update(time: number, delta: number): void {
+        const matrix = this.getWorldTransformMatrix()
+        const x = matrix.tx + this.zapper.x * matrix.a + this.zapper.y * matrix.c
+        const y = matrix.ty + this.zapper.x * matrix.b + this.zapper.y * matrix.d
+        this.polygon.pos = new SAT.Vector(x, y)
     }
 }
 
