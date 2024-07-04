@@ -156,6 +156,7 @@ class LoadingScene extends Phaser.Scene {
 
         this.load.image('title', 'assets/Levels/Title/Objects/title_small.png')
         this.load.image('titleGlow', 'assets/Levels/Title/Objects/titleGlow_small.png')
+        this.load.image('pauseButton', 'assets/UI/buttonPause.png')
 
         this.load.spritesheet('orb', 'assets/Obstacles/Zapper/orbAnim.png', {
             frameWidth: 62,

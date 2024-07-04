@@ -9,6 +9,7 @@ class PreloadScene extends Phaser.Scene {
         this.load.bitmapFont('NewAthleticM54GrayInverted', 'assets/fonts/NewAthleticM54GrayInverted.png', 'assets/fonts/NewAthleticM54GrayInverted.xml')
         this.load.bitmapFont('NewAthleticM54Gold', 'assets/fonts/NewAthleticM54Gold.png', 'assets/fonts/NewAthleticM54Gold.xml')
         this.load.bitmapFont('NewAthleticM54Blue', 'assets/fonts/NewAthleticM54Blue.png', 'assets/fonts/NewAthleticM54Blue.xml')
+        this.load.bitmapFont('NewAthleticM54White', 'assets/fonts/NewAthleticM54White.png', 'assets/fonts/NewAthleticM54White.xml')
         this.load.image('loadingScreen', 'assets/Splash/loading_screen.png')
     }
 

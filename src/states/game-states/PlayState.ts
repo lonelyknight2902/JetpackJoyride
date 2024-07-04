@@ -15,6 +15,8 @@ class PlayState extends State {
     enter(): void {
         this.pauseKey = this.scene.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.ESC)
         // this.scene.zapperSpawnEvent.paused = false
+        this.scene.pauseButton.setVisible(true)
+        this.scene.pauseButton.setActive(true)
     }
 
     exit(): void {
@@ -25,7 +27,10 @@ class PlayState extends State {
         if (this.scene.getPlayer().getCurrentState() === 'player-die') {
             this.stateMachine.transition('over')
         }
-        if (this.pauseKey?.isDown && this.elapsedTime > 500) {
+        if (this.elapsedTime > 1000) {
+            this.scene.pauseButton.setInteractive()
+        }
+        if (this.pauseKey?.isDown && this.elapsedTime > 1000) {
             this.stateMachine.transition('pause')
         }
         this.scene.getPlayer().update(time, delta)

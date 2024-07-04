@@ -19,7 +19,7 @@ import {
     ResultState,
     StartState,
 } from '../states/game-states'
-import { Result, Score } from '../user-interfaces'
+import { Pause, PauseButton, Result, Score } from '../user-interfaces'
 
 class PlayScene extends Phaser.Scene {
     public stateMachine: StateMachine
@@ -36,6 +36,8 @@ class PlayScene extends Phaser.Scene {
     public coinText: Phaser.GameObjects.Text
     public resultUI: Phaser.GameObjects.Container
     public scoreUI: Phaser.GameObjects.Container
+    public pauseUI: Phaser.GameObjects.Container
+    public pauseButton: PauseButton
     public overlay: Phaser.GameObjects.Graphics
     public titleMap: TitleMap
     public missile: Missile
@@ -120,11 +122,16 @@ class PlayScene extends Phaser.Scene {
         this.lasers = new LasersContainer(this, 0, UPPER_BOUND)
         this.missiles = new MissilesContainer(this, 0, UPPER_BOUND)
         this.scoreUI = new Score(this, 0, 0)
+        this.pauseButton = new PauseButton(this, SCREEN_WIDTH - 50, 50)
+        this.pauseButton.setVisible(false)
+        this.pauseButton.setActive(false)
         this.overlay = this.add.graphics()
         this.overlay.fillStyle(0x000000, 0.7)
         this.overlay.fillRect(0, 0, this.cameras.main.width, this.cameras.main.height)
         this.overlay.setVisible(false)
+        this.pauseUI = new Pause(this, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
         this.resultUI = new Result(this, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 200)
+        this.pauseUI.setVisible(false)
         this.resultUI.setVisible(false)
         this.levelMusic = this.sound.add('musicLevel', { loop: true })
         this.menuAmbiance = this.sound.add('menuAmbiance', { loop: true })
