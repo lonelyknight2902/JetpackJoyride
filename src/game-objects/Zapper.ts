@@ -2,12 +2,12 @@ import Player from './Player'
 import SAT from 'sat'
 
 class Zapper extends Phaser.GameObjects.Container {
-    private orb1: Phaser.GameObjects.Sprite
-    private orb2: Phaser.GameObjects.Sprite
-    private glow1: Phaser.GameObjects.Sprite
-    private glow2: Phaser.GameObjects.Sprite
-    private zapper: Phaser.GameObjects.Sprite
-    private polygon: SAT.Polygon
+    protected orb1: Phaser.GameObjects.Sprite
+    protected orb2: Phaser.GameObjects.Sprite
+    protected glow1: Phaser.GameObjects.Sprite
+    protected glow2: Phaser.GameObjects.Sprite
+    protected zapper: Phaser.GameObjects.Sprite
+    protected polygon: SAT.Polygon
     constructor(scene: Phaser.Scene, x: number, y: number) {
         super(scene, x, y)
         this.orb1 = scene.add.sprite(0, 0, 'orb')
@@ -100,15 +100,9 @@ class Zapper extends Phaser.GameObjects.Container {
         const matrix = this.getWorldTransformMatrix()
         // this.setRotation(this.rotation + (1 * Math.PI / 180 * delta) / 1000)
         // this.angle += 1 * delta / 1000
-        this.rotation += 0.01
         const x = matrix.tx + this.zapper.x * matrix.a + this.zapper.y * matrix.c
         const y = matrix.ty + this.zapper.x * matrix.b + this.zapper.y * matrix.d
         this.polygon.pos = new SAT.Vector(x, y)
-        this.polygon.setAngle(this.rotation)
-        const bounds = this.getBounds()
-        const body = this.body as Phaser.Physics.Arcade.Body
-        body.setSize(bounds.width, bounds.height)
-        body.setOffset(bounds.x - x, bounds.y - y)
     }
 }
 

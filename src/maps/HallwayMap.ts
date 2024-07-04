@@ -1,5 +1,5 @@
 import { LOWER_BOUND, UPPER_BOUND } from '../constants'
-import { Coins, Player, Zapper } from '../game-objects'
+import { Coins, Player, RotatingZapper, Zapper } from '../game-objects'
 import { ScoreManager } from '../manager'
 import { PlayScene } from '../scenes'
 

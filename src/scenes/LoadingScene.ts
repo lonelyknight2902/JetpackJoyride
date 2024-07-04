@@ -165,7 +165,16 @@ class LoadingScene extends Phaser.Scene {
             frameWidth: 128,
             frameHeight: 128,
         })
+        this.load.spritesheet('orbGlowRotating', 'assets/Obstacles/Zapper/RotatingZappers/glowRotating.png', {
+            frameWidth: 128,
+            frameHeight: 128,
+        })
         this.load.spritesheet('zapper', 'assets/Obstacles/Zapper/RegularZappers/zapEffects.png', {
+            frameWidth: 256,
+            frameHeight: 117,
+        })
+
+        this.load.spritesheet('zapperRotating', 'assets/Obstacles/Zapper/RotatingZappers/zapEffectsRotating.png', {
             frameWidth: 256,
             frameHeight: 117,
         })
