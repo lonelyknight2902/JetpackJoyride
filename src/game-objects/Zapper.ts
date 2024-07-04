@@ -67,7 +67,7 @@ class Zapper extends Phaser.GameObjects.Container {
         this.add(this.orb1)
         this.add(this.orb2)
         this.polygon = new SAT.Box(new SAT.Vector(this.x, this.y), 60, 240).toPolygon()
-        this.setRotation(Math.PI / 3)
+        this.setRotation((Math.PI / 6) * Phaser.Math.Between(0, 3))
         const angle = this.rotation
         this.polygon.setAngle(angle)
         scene.physics.add.existing(this)
@@ -98,9 +98,17 @@ class Zapper extends Phaser.GameObjects.Container {
 
     update(time: number, delta: number): void {
         const matrix = this.getWorldTransformMatrix()
+        // this.setRotation(this.rotation + (1 * Math.PI / 180 * delta) / 1000)
+        // this.angle += 1 * delta / 1000
+        this.rotation += 0.01
         const x = matrix.tx + this.zapper.x * matrix.a + this.zapper.y * matrix.c
         const y = matrix.ty + this.zapper.x * matrix.b + this.zapper.y * matrix.d
         this.polygon.pos = new SAT.Vector(x, y)
+        this.polygon.setAngle(this.rotation)
+        const bounds = this.getBounds()
+        const body = this.body as Phaser.Physics.Arcade.Body
+        body.setSize(bounds.width, bounds.height)
+        body.setOffset(bounds.x - x, bounds.y - y)
     }
 }
 
