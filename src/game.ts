@@ -14,14 +14,14 @@ class Game {
             physics: {
                 default: 'arcade',
                 arcade: {
-                    // debug: true,
+                    debug: true,
                     gravity: { x: 0, y: GAME_GRAVITY },
                 },
             },
             scale: {
                 mode: Phaser.Scale.FIT,
-                autoCenter: Phaser.Scale.CENTER_BOTH
-            }
+                autoCenter: Phaser.Scale.CENTER_BOTH,
+            },
         }
 
         this._game = new Phaser.Game(config)
