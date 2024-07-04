@@ -10,6 +10,7 @@ class HallwayMap extends Phaser.GameObjects.Container {
     private scoreManager: ScoreManager
     private coinPickupSound: Phaser.Sound.BaseSound[]
     private currentSound = 0
+    private zappers: Zapper[] = []
     constructor(scene: PlayScene, x: number, y: number) {
         super(scene, x, y)
         this.map = scene.make.tilemap({ key: 'hallwayMap' })
@@ -68,6 +69,7 @@ class HallwayMap extends Phaser.GameObjects.Container {
                 const x = zapper.x ? zapper.x : 0
                 const y = zapper.y ? zapper.y : 0
                 const zapperObject = new Zapper(scene, x, y)
+                this.zappers.push(zapperObject)
                 this.add(zapperObject)
             }
         })
@@ -95,10 +97,13 @@ class HallwayMap extends Phaser.GameObjects.Container {
         ]
     }
 
-    update(): void {
+    update(time: number, delta: number): void {
         if (this.backgroundLayer) {
             this.backgroundLayer.setPosition(this.x, this.y)
         }
+        this.zappers.forEach((zapper) => {
+            zapper.update(time, delta)
+        })
     }
 
     getBackgroundLayer(): Phaser.Tilemaps.TilemapLayer | null {
