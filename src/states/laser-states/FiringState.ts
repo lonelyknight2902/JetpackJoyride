@@ -29,6 +29,7 @@ class FiringState extends State {
     }
 
     exit(): void {
+        this.elapsedTime = 0
         this.laser.laserFireAudio.stop()
     }
 
@@ -36,7 +37,6 @@ class FiringState extends State {
         this.elapsedTime += delta
         if (this.elapsedTime >= 2000) {
             this.stateMachine.transition('stop')
-            this.elapsedTime = 0
         }
     }
 }

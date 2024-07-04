@@ -23,12 +23,12 @@ class StopState extends State {
     exit(): void {
         this.laser.laserBeam.setActive(false)
         this.laser.laserBeam.setVisible(false)
+        this.elapsedTime = 0
     }
 
     execute(time: number, delta: number): void {
         if (this.elapsedTime >= 1000) {
             this.stateMachine.transition('exit')
-            this.elapsedTime = 0
         }
         this.elapsedTime += delta
     }

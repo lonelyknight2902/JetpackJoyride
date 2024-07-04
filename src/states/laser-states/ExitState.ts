@@ -16,23 +16,22 @@ class ExitState extends State {
         this.scene.tweens.add({
             targets: this.laser.laserPodLeft,
             x: -100,
-            duration: 1000
+            duration: 1000,
         })
         this.scene.tweens.add({
             targets: this.laser.laserPodRight,
             x: SCREEN_WIDTH + 100,
-            duration: 1000
+            duration: 1000,
         })
     }
 
     exit(): void {
-        return
+        this.elapsedTime = 0
     }
 
     execute(time: number, delta: number): void {
         if (this.elapsedTime >= 1000) {
             this.stateMachine.transition('deactivate')
-            this.elapsedTime = 0
         }
         this.elapsedTime += delta
     }

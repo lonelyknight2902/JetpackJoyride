@@ -33,14 +33,13 @@ class ReadyState extends State {
     }
 
     exit(): void {
-        return
+        this.elapsedTime = 0
     }
 
     execute(time: number, delta: number): void {
         this.elapsedTime += delta
         if (this.elapsedTime >= 1000) {
             this.stateMachine.transition('charging')
-            this.elapsedTime = 0
         }
     }
 }

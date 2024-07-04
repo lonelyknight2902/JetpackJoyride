@@ -23,6 +23,7 @@ class ChargingState extends State {
     }
 
     exit(): void {
+        this.elapsedTime = 0
         this.laser.laserWarningAudio.stop()
         return
     }
@@ -31,7 +32,6 @@ class ChargingState extends State {
         this.elapsedTime += delta
         if (this.elapsedTime >= 1000) {
             this.stateMachine.transition('firing')
-            this.elapsedTime = 0
         }
     }
 }
