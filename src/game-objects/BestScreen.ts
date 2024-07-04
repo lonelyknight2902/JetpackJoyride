@@ -24,6 +24,11 @@ class BestScreen extends Phaser.GameObjects.Container {
         this.add(this.bestText)
         this.add(this.bestDistanceText)
     }
+
+    update(...args: any[]): void {
+        const best = ScoreManager.getInstance().getBestDistance()
+        this.bestDistanceText.setText(`${best}m`)
+    }
 }
 
 export default BestScreen

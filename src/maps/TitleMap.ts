@@ -81,6 +81,7 @@ class TitleMap extends Phaser.GameObjects.Container {
 
     reset(): void {
         this.jetpackStand.setFrame(0)
+        this.bestScreen.update()
     }
 
     getBackgroundLayer(): Phaser.Tilemaps.TilemapLayer | null {
