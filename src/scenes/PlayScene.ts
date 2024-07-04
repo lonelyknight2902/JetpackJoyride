@@ -1,12 +1,10 @@
 import {
     LOWER_BOUND,
-    MAX_INTERVAL,
-    MIN_INTERVAL,
     SCREEN_HEIGHT,
     SCREEN_WIDTH,
     UPPER_BOUND,
 } from '../constants'
-import { Laser, LasersContainer, Missile, MissilesContainer, Player, Title } from '../game-objects'
+import { LasersContainer, Missile, MissilesContainer, Player, Title } from '../game-objects'
 import { ScoreManager } from '../manager'
 import { HallwayMap, LabMap, TitleMap } from '../maps'
 import { ZapperPool } from '../object-pools'

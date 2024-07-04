@@ -1,5 +1,4 @@
-import { LOWER_BOUND, UPPER_BOUND } from '../constants'
-import { Coins, Player, RotatingZapper, Zapper } from '../game-objects'
+import { Player, RotatingZapper, Zapper } from '../game-objects'
 import { ScoreManager } from '../manager'
 import { PlayScene } from '../scenes'
 
@@ -132,7 +131,7 @@ class HallwayMap extends Phaser.GameObjects.Container {
             .filter((coin) => coin.state == 'collected')
             .forEach((coin: Phaser.GameObjects.GameObject) => {
                 // coin.setVisible(true)
-                ;(coin as Phaser.GameObjects.Sprite).setVisible(true)
+                (coin as Phaser.GameObjects.Sprite).setVisible(true)
                 this.scene.anims.play('spin', coin)
                 coin.state = 'idle'
             })

@@ -1,5 +1,3 @@
-import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../constants"
-
 class Pause extends Phaser.GameObjects.Container {
     private pauseText: Phaser.GameObjects.BitmapText
     // private screen: Phaser.GameObjects.Sprite
