@@ -28,14 +28,14 @@ class PlayerHead extends Phaser.GameObjects.Sprite{
         this.anims.create({
             key: 'player-zap',
             frames: this.anims.generateFrameNumbers('player-head', { frames: [16, 17, 18, 19] }),
-            frameRate: 60,
+            frameRate: 10,
             repeat: 0,
         })
         this.anims.create({
             key: 'player-burn',
             frames: this.anims.generateFrameNumbers('player-head', { frames: [20, 21, 22, 23] }),
-            frameRate: 60,
-            repeat: 0,
+            frameRate: 10,
+            repeat: -1,
         })
         this.anims.create({
             key: 'player-die',
