@@ -32,8 +32,8 @@ class TitleMap extends Phaser.GameObjects.Container {
             }
         }
 
-        this.wallHole = scene.add.image(32, 690, 'titleWallHole')
-        this.wallHole.setOrigin(0.25, 1)
+        this.wallHole = scene.add.image(-34, 690, 'titleWallHole')
+        this.wallHole.setOrigin(0, 1)
         this.wallHole.setScale(2)
         this.wallHole.setVisible(false)
         this.add(this.wallHole)

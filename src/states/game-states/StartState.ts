@@ -48,6 +48,7 @@ class StartState extends State {
         this.scene.pauseButton.setVisible(false)
         this.scene.pauseButton.setActive(false)
         this.scene.touchText.setVisible(true)
+        this.scene.titleMap.hideHole()
         this.scene.lasers.getLasers().forEach((laser) => {
             laser.stateMachine.transition('deactivate')
         })
@@ -66,8 +67,8 @@ class StartState extends State {
         })
         this.elapsedTime = 0
         this.scene.scoreUI.setVisible(true)
-        this.scene.titleMap.hideHole()
-        this.scene.titleMap.getWallHole().setPosition(32, 690)
+        // this.scene.titleMap.hideHole()
+        // this.scene.titleMap.getWallHole().setPosition(32, 690)
         this.scene.scoreUI.update()
         this.scene.menuAmbiance.stop()
         this.scene.touchText.setVisible(false)

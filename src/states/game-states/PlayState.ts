@@ -60,10 +60,6 @@ class PlayState extends State {
             map.x -= distance
             map.update()
         })
-        const wallHole = this.scene.titleMap.getWallHole()
-        if (wallHole.x + wallHole.width > 0) {
-            wallHole.x -= distance
-        }
         this.scene.scoreManager.increaseDistance(distance / 32)
         // this.scene.distanceText.setText(`${String(Math.floor(this.scene.scoreManager.getDistance())).padStart(4, '0')}m`)
         // this.scene.coinText.setText(`${String(Math.floor(this.scene.scoreManager.getCoin())).padStart(3, '0')}`)
