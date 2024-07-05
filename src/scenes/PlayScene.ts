@@ -1,9 +1,4 @@
-import {
-    LOWER_BOUND,
-    SCREEN_HEIGHT,
-    SCREEN_WIDTH,
-    UPPER_BOUND,
-} from '../constants'
+import { LOWER_BOUND, SCREEN_HEIGHT, SCREEN_WIDTH, UPPER_BOUND } from '../constants'
 import { LasersContainer, Missile, MissilesContainer, Player, Title } from '../game-objects'
 import { ScoreManager } from '../manager'
 import { HallwayMap, LabMap, TitleMap } from '../maps'
@@ -47,6 +42,7 @@ class PlayScene extends Phaser.Scene {
     public windowSmash: Phaser.Sound.BaseSound
     public lasers: LasersContainer
     public missiles: MissilesContainer
+    public touchText: Phaser.GameObjects.BitmapText
     constructor() {
         super('PlayScene')
     }
@@ -87,9 +83,25 @@ class PlayScene extends Phaser.Scene {
         this.initialMapList = [this.titleMap, hallwayMap, labmap]
         this.title = new Title(this, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
         this.title.setScale(0.8)
+        this.touchText = this.add.bitmapText(
+            SCREEN_WIDTH / 2,
+            SCREEN_HEIGHT / 2 + 200,
+            'NewAthleticM54White',
+            'TOUCH ANYWHERE TO PLAY',
+            32
+        )
+        this.touchText.setOrigin(0.5)
+        this.tweens.add({
+            targets: this.touchText,
+            alpha: 0,
+            duration: 500,
+            yoyo: true,
+            repeat: -1,
+        })
+        this.shadow = this.add.image(230, 650, 'player-shadow')
+        this.shadow.setAlpha(0.5)
         this._player = Player.getInstance(this, 200, 200)
         this._player.setScale(2)
-        this.shadow = this.add.image(this._player.x + 30, 650, 'player-shadow')
         this.shadow.setScale(1.5)
         this.cursors = this.input.keyboard?.createCursorKeys()
         this.platforms = this.physics.add.staticGroup()
