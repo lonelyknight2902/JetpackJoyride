@@ -20,11 +20,6 @@ class ResultState extends State {
     }
 
     exit(): void {
-        this.scene.initialMapList.forEach((map) => {
-            if (map instanceof LabMap || map instanceof HallwayMap) {
-                map.reset()
-            }
-        })
         this.scene.scoreManager.reset()
         this.scene.resultUI.setVisible(false)
         this.scene.overlay.setVisible(false)
@@ -34,13 +29,13 @@ class ResultState extends State {
     }
 
     execute(time: number, delta: number): void {
-        if (
-            this.scene.input.keyboard?.createCursorKeys().space?.isDown ||
-            this.scene.input.activePointer.isDown
-        ) {
-            this.stateMachine.transition('start')
-            this.scene.getPlayer().stateMachine.transition('player-run')
-        }
+        // if (
+        //     this.scene.input.keyboard?.createCursorKeys().space?.isDown ||
+        //     this.scene.input.activePointer.isDown
+        // ) {
+        //     this.stateMachine.transition('start')
+        //     this.scene.getPlayer().stateMachine.transition('player-run')
+        // }
     }
 }
 

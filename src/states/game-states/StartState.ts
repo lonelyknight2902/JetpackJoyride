@@ -1,4 +1,5 @@
 import { SCREEN_HEIGHT, TRANSITION_DELAY } from '../../constants'
+import { LabMap, HallwayMap } from '../../maps'
 import { PlayScene } from '../../scenes'
 import State from '../../types/State'
 
@@ -16,12 +17,18 @@ class StartState extends State {
         console.log('StartState')
         this.scene.setMapList([...this.scene.initialMapList])
         const mapList = this.scene.getMapList()
+        this.scene.initialMapList.forEach((map) => {
+            if (map instanceof LabMap || map instanceof HallwayMap) {
+                map.reset()
+            }
+        })
         console.log(this.scene.initialMapList)
         console.log(mapList)
         mapList[0].setPosition(0, 0)
         mapList[1].setPosition(928, 0)
         mapList[2].setPosition(928 + 4032 - 32 * 6, 0)
         const map = this.scene.getMap()
+        
         map.add(mapList[0])
         map.sendToBack(mapList[1])
         map.sendToBack(mapList[2])
@@ -30,6 +37,9 @@ class StartState extends State {
         this.scene.getPlayer().setPosition(200, 576)
         this.scene.getShadow().x = this.scene.getPlayer().x + 30
         this.scene.getPlayer().setVisible(false)
+        this.scene.getPlayer().bulletPool.despawnAll()
+        this.scene.getPlayer().bulletFlash.setVisible(false)
+        this.scene.getPlayer().getShell().stop(true)
         this.scene.getShadow().setVisible(false)
         this.scene.scoreUI.setVisible(false)
         this.scene.cameras.main.fadeIn(1000, 0, 0, 0)
@@ -37,12 +47,14 @@ class StartState extends State {
         this.scene.titleMap.reset()
         this.scene.pauseButton.setVisible(false)
         this.scene.pauseButton.setActive(false)
+        this.scene.touchText.setVisible(true)
         this.scene.lasers.getLasers().forEach((laser) => {
             laser.stateMachine.transition('deactivate')
         })
         this.scene.missiles.getMissiles().forEach((missile) => {
             missile.stateMachine.transition('deactivated')
         })
+        this.scene.getPlayer().stateMachine.transition('player-run')
     }
 
     exit(): void {
@@ -58,6 +70,7 @@ class StartState extends State {
         this.scene.titleMap.getWallHole().setPosition(32, 690)
         this.scene.scoreUI.update()
         this.scene.menuAmbiance.stop()
+        this.scene.touchText.setVisible(false)
     }
 
     execute(time: number, delta: number): void {

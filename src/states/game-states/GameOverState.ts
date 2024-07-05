@@ -1,3 +1,4 @@
+import { GAME_SPEED } from '../../constants'
 import { HallwayMap, LabMap, TitleMap } from '../../maps'
 import { PlayScene } from '../../scenes'
 import State from '../../types/State'
@@ -5,6 +6,8 @@ import State from '../../types/State'
 class GameOverState extends State {
     private scene: PlayScene
     private time: number
+    private acceleration = -400
+    private speed = GAME_SPEED
     constructor(scene: PlayScene) {
         super()
         this.scene = scene
@@ -12,6 +15,7 @@ class GameOverState extends State {
 
     enter(): void {
         // this.scene.zapperSpawnEvent.paused = true
+        this.speed = GAME_SPEED
     }
 
     exit(): void {
@@ -19,9 +23,9 @@ class GameOverState extends State {
     }
 
     execute(time: number, delta: number): void {
+        const body = this.scene.getPlayer().body as Phaser.Physics.Arcade.Body
         if (this.scene.getPlayer().isDead()) {
-            const body = this.scene.getPlayer().body as Phaser.Physics.Arcade.Body
-            if (body.blocked.down) {
+            if (body.velocity.y === 0 && this.speed === 0) {
                 this.stateMachine.transition('result')
             }
             // this.scene.getPlayer().stateMachine.transition('player-run')
@@ -32,6 +36,13 @@ class GameOverState extends State {
             .setScale(1.5 * (1 - (576 - this.scene.getPlayer().y) / (576 - 116)) + 0.1)
         const mapContainer = this.scene.getMap()
         const mapList = this.scene.getMapList()
+        if (this.speed > 0 && body.blocked.down) {
+            this.speed += (this.acceleration * delta) / 1000
+            console.log('Speed: ', this.speed)
+            if (this.speed < 0) {
+                this.speed = 0
+            }
+        }
         mapContainer.each((map: Phaser.GameObjects.Container) => {
             if (map.x + map.width < 0) {
                 mapContainer.remove(map)
@@ -49,7 +60,7 @@ class GameOverState extends State {
                     }
                 }
             }
-            map.x -= (500 * delta) / 1000
+            map.x -= (this.speed * delta) / 1000
             map.update()
         })
         // this.scene.scoreManager.increaseDistance((500 * delta) / 32)

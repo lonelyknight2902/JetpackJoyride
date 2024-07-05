@@ -19,6 +19,8 @@ class PauseState extends State {
         this.scene.menuMusic.play()
         this.scene.overlay.setVisible(true)
         this.scene.pauseUI.setVisible(true)
+        this.scene.pauseUI.setActive(true)
+        this.scene.pauseUI.setInteractive()
         this.scene.pauseButton.setActive(false)
         this.scene.pauseButton.disableInteractive()
         // this.scene.scene.pause()
@@ -33,17 +35,18 @@ class PauseState extends State {
         this.scene.overlay.setVisible(false)
         this.scene.pauseUI.setVisible(false)
         this.scene.pauseButton.setActive(true)
+        this.scene.pauseButton.setInteractive()
         // this.scene.scene.resume()
     }
 
     execute(time: number, delta: number): void {
-        if (
-            (this.pauseKey && Phaser.Input.Keyboard.JustDown(this.pauseKey) ||
-            this.scene.input.activePointer.isDown) && this.elapsedTime >= 500
-        ) {
-            console.log('PauseState -> PlayState')
-            this.stateMachine.transition('play')
-        }
+        // if (
+        //     (this.pauseKey && Phaser.Input.Keyboard.JustDown(this.pauseKey) ||
+        //     this.scene.input.activePointer.isDown) && this.elapsedTime >= 500
+        // ) {
+        //     console.log('PauseState -> PlayState')
+        //     this.stateMachine.transition('play')
+        // }
 
         this.elapsedTime += delta
     }
