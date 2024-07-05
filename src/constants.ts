@@ -1,4 +1,4 @@
-export const ASCEND_SPEED = 300
+export const ASCEND_SPEED = 250
 export const GAME_GRAVITY = 2000
 export const UPPER_BOUND = 100
 export const LOWER_BOUND = 660
