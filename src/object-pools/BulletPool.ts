@@ -47,6 +47,12 @@ class BulletPool {
         bullet.setActive(false)
     }
 
+    despawnAll(): void {
+        this.bullets.forEach((bullet) => {
+            this.despawn(bullet)
+        })
+    }
+
     update(): void {
         this.bullets.forEach((bullet) => {
             // const collisionY =
