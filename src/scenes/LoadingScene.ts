@@ -70,6 +70,9 @@ class LoadingScene extends Phaser.Scene {
         this.load.image('titleWallHole', 'assets/Levels/Title/titleWallHole.png')
         this.load.image('hallway1', 'assets/Levels/Hallway1/hallway1FG_1_TVOS.png')
         this.load.image('hallway2', 'assets/Levels/Hallway1/hallway1FG_2_TVOS.png')
+        this.load.image('room1', 'assets/Levels/Room1/room1FG_1_TVOS.png')
+        this.load.image('room2', 'assets/Levels/Room1/room1FG_2_TVOS.png')
+        this.load.tilemapTiledJSON('roomMap', 'assets/room.json')
 
         this.load.image('coinIcon', 'assets/Entities/coinSlow_TVOS.png')
         this.load.spritesheet('coin', 'assets/Entities/coin1_TVOS.png', {

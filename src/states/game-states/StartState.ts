@@ -25,10 +25,14 @@ class StartState extends State {
         console.log(this.scene.initialMapList)
         console.log(mapList)
         mapList[0].setPosition(0, 0)
-        mapList[1].setPosition(928, 0)
-        mapList[2].setPosition(928 + 4032 - 32 * 6, 0)
+        // mapList[1].setPosition(928, 0)
+        // mapList[2].setPosition(928 + 4032 - 32 * 6, 0)
+        // mapList[3].setPosition(928 + 4032 - 32 * 6 + 4032, 0)
+        for (let i = 1; i < mapList.length; i++) {
+            mapList[i].setPosition(mapList[i - 1].x + mapList[i - 1].width - 32 * 6, 0)
+        }
         const map = this.scene.getMap()
-        
+
         map.add(mapList[0])
         map.sendToBack(mapList[1])
         map.sendToBack(mapList[2])

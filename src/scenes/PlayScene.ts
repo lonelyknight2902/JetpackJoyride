@@ -1,7 +1,7 @@
 import { LOWER_BOUND, SCREEN_HEIGHT, SCREEN_WIDTH, UPPER_BOUND } from '../constants'
 import { LasersContainer, Missile, MissilesContainer, Player, Title } from '../game-objects'
 import { ScoreManager } from '../manager'
-import { HallwayMap, LabMap, TitleMap } from '../maps'
+import { HallwayMap, LabMap, RoomMap, TitleMap } from '../maps'
 import { ZapperPool } from '../object-pools'
 import { StateMachine } from '../states'
 import {
@@ -69,18 +69,25 @@ class PlayScene extends Phaser.Scene {
         // renderTexture.saveTexture('player')
         this.scoreManager = ScoreManager.getInstance()
         this.map = this.add.container(0, 0)
-        const labmap = new LabMap(this, 928 + 4032 - 32 * 6, 0)
         this.titleMap = new TitleMap(this, 0, 0)
         const hallwayMap = new HallwayMap(this, 928, 0)
+        const labmap = new LabMap(this, 928 + hallwayMap.width - 32 * 6, 0)
+        const roomMap = new RoomMap(
+            this,
+            928 + (hallwayMap.width - 32 * 6 + labmap.width) - 32 * 6,
+            0
+        )
         console.log(hallwayMap.width)
         console.log(labmap.width)
         console.log(this.titleMap.width)
         // this.map.add(titleMap)
         this.map.add(hallwayMap)
         this.map.add(labmap)
+        this.map.add(roomMap)
         this.map.sendToBack(hallwayMap)
         this.map.sendToBack(labmap)
-        this.initialMapList = [this.titleMap, hallwayMap, labmap]
+        this.map.sendToBack(roomMap)
+        this.initialMapList = [this.titleMap, hallwayMap, labmap, roomMap]
         this.title = new Title(this, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
         this.title.setScale(0.8)
         this.touchText = this.add.bitmapText(

@@ -1,5 +1,5 @@
 import { GAME_SPEED } from '../../constants'
-import { HallwayMap, LabMap, TitleMap } from '../../maps'
+import { HallwayMap, LabMap, RoomMap, TitleMap } from '../../maps'
 import { PlayScene } from '../../scenes'
 import State from '../../types/State'
 
@@ -52,7 +52,7 @@ class PlayState extends State {
                     mapList.push(map)
                     mapContainer.add(map)
                     mapContainer.sendToBack(map)
-                    if (map instanceof HallwayMap || map instanceof LabMap) {
+                    if (map instanceof HallwayMap || map instanceof LabMap || map instanceof RoomMap) {
                         map.reset()
                     }
                 }
