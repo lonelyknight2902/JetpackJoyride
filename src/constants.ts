@@ -1,5 +1,5 @@
-export const ASCEND_SPEED = 250
-export const GAME_GRAVITY = 2000
+export const ASCEND_ACCELERATION = 2000
+export const GAME_GRAVITY = 1000
 export const UPPER_BOUND = 100
 export const LOWER_BOUND = 660
 export const SCREEN_WIDTH = 1365

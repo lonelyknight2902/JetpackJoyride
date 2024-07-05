@@ -1,14 +1,15 @@
-import { ANGLE_STEP, ASCEND_SPEED, FIRE_RATE, MAX_ANGLE, MIN_ANGLE } from '../../constants'
+import { ANGLE_STEP, ASCEND_ACCELERATION, FIRE_RATE, MIN_ANGLE } from '../../constants'
 import { Player } from '../../game-objects'
+import { PlayScene } from '../../scenes'
 import State from '../../types/State'
 
 class AscendState extends State {
     private _player: Player
-    private _scene: Phaser.Scene
+    private _scene: PlayScene
     private _bulletTimer = 0
     private currentAngle = MIN_ANGLE
     private angleStep = ANGLE_STEP
-    constructor(player: Player, scene: Phaser.Scene) {
+    constructor(player: Player, scene: PlayScene) {
         super()
         this._player = player
         this._scene = scene
@@ -28,12 +29,15 @@ class AscendState extends State {
         this._player.getShell().start()
         this._player.jetpack.fireSound.play()
         const body = this._player.body as Phaser.Physics.Arcade.Body
-        body.setVelocityY(-ASCEND_SPEED)
+        // body.setVelocityY(-ASCEND_SPEED)
+        body.setVelocityY(0)
+        body.setAccelerationY(-ASCEND_ACCELERATION)
         body.setSize(24, 36)
     }
 
     exit(): void {
-        return
+        const body = this._player.body as Phaser.Physics.Arcade.Body
+        body.setAccelerationY(0)
     }
 
     execute(time: number, delta: number): void {
@@ -88,14 +92,16 @@ class AscendState extends State {
                     bulletBody.velocity.y / Math.tan(this.currentAngle * (Math.PI / 180))
                 )
             }
-            if (!this._player.jetpack.fireSound.isPlaying) this._player.jetpack.fireSound.play()
+            if (!this._player.jetpack.fireSound.isPlaying && this._scene.stateMachine.getState() !== 'pause') this._player.jetpack.fireSound.play()
             const body = this._player.body as Phaser.Physics.Arcade.Body
-            body.setVelocityY(-ASCEND_SPEED)
+            body.setAccelerationY(-ASCEND_ACCELERATION)
         } else {
             this._player.bulletFlash.setVisible(false)
             this._player.jetpack.anims.play('jetpack-ascend')
             this._player.getShell().stop()
             this._player.jetpack.fireSound.stop()
+            const body = this._player.body as Phaser.Physics.Arcade.Body
+            body.setAccelerationY(0)
         }
     }
 }
