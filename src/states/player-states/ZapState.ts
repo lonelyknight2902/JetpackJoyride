@@ -14,6 +14,7 @@ class ZapState extends State {
         this._player.playerHead.anims.play('player-zap')
         this._player.playerBoneAudio.play()
         this._player.jetpack.setVisible(false)
+        this._player.bulletFlash.setVisible(false)
         this._player.getShell().stop()
         this._player.getShell().setVisible(false)
         console.log('Player is zapping')
