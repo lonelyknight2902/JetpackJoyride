@@ -1,5 +1,5 @@
 import { SCREEN_HEIGHT, TRANSITION_DELAY } from '../../constants'
-import { LabMap, HallwayMap } from '../../maps'
+import { LabMap, HallwayMap, RoomMap } from '../../maps'
 import { PlayScene } from '../../scenes'
 import State from '../../types/State'
 
@@ -18,7 +18,7 @@ class StartState extends State {
         this.scene.setMapList([...this.scene.initialMapList])
         const mapList = this.scene.getMapList()
         this.scene.initialMapList.forEach((map) => {
-            if (map instanceof LabMap || map instanceof HallwayMap) {
+            if (map instanceof LabMap || map instanceof HallwayMap || map instanceof RoomMap) {
                 map.reset()
             }
         })
@@ -47,6 +47,7 @@ class StartState extends State {
         this.scene.getShadow().setVisible(false)
         this.scene.scoreUI.setVisible(false)
         this.scene.cameras.main.fadeIn(1000, 0, 0, 0)
+        this.scene.sound.stopAll()
         this.scene.menuAmbiance.play()
         this.scene.titleMap.reset()
         this.scene.pauseButton.setVisible(false)

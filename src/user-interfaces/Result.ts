@@ -38,6 +38,7 @@ class Result extends Phaser.GameObjects.Container {
             console.log('Next')
             // scene.scene.start('play')
             scene.stateMachine.transition('start')
+            scene.sound.play('UIBack')
         })
         this.add(youFlewText)
         this.add(this.distanceText)

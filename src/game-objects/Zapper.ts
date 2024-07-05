@@ -1,3 +1,4 @@
+import { PlayScene } from '../scenes'
 import Player from './Player'
 import SAT from 'sat'
 
@@ -8,7 +9,7 @@ class Zapper extends Phaser.GameObjects.Container {
     protected glow2: Phaser.GameObjects.Sprite
     protected zapper: Phaser.GameObjects.Sprite
     protected polygon: SAT.Polygon
-    constructor(scene: Phaser.Scene, x: number, y: number) {
+    constructor(scene: PlayScene, x: number, y: number) {
         super(scene, x, y)
         this.orb1 = scene.add.sprite(0, 0, 'orb')
         this.orb2 = scene.add.sprite(0, 200, 'orb')

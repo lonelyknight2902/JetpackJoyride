@@ -1,10 +1,11 @@
 import { GAME_SPEED } from '../constants'
 import { Zapper } from '../game-objects'
+import { PlayScene } from '../scenes'
 
 class ZapperPool {
     private zappers: Zapper[] = []
-    private scene: Phaser.Scene
-    constructor(scene: Phaser.Scene) {
+    private scene: PlayScene
+    constructor(scene: PlayScene) {
         this.scene = scene
     }
 

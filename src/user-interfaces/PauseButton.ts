@@ -14,6 +14,7 @@ class PauseButton extends Phaser.GameObjects.Image {
             if (scene.stateMachine.getState() === 'pause') return
             this.setScale(1)
             scene.stateMachine.transition('pause')
+            scene.sound.play('UISelect')
         })
     }
 }

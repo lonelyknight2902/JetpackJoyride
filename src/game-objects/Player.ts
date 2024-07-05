@@ -1,4 +1,5 @@
 import { BulletPool } from '../object-pools'
+import { PlayScene } from '../scenes'
 import { StateMachine } from '../states'
 import {
     AscendState,
@@ -22,13 +23,13 @@ class Player extends Phaser.GameObjects.Container {
     private _bulletFlash: BulletFlash
     private shell: Phaser.GameObjects.Particles.ParticleEmitter
     public bulletPool: BulletPool
-    private _scene: Phaser.Scene
+    private _scene: PlayScene
     private static instance: Player
     public playerBoneAudio: Phaser.Sound.BaseSound
     // private _renderTexture: Phaser.GameObjects.RenderTexture
     // private _container: Phaser.GameObjects.Container
     public polygon: SAT.Polygon
-    constructor(scene: Phaser.Scene, x: number, y: number) {
+    constructor(scene: PlayScene, x: number, y: number) {
         // texture: string, renderTexture: Phaser.GameObjects.RenderTexture
         super(scene, x, y)
         this._scene = scene
@@ -80,7 +81,7 @@ class Player extends Phaser.GameObjects.Container {
         this.playerBoneAudio = scene.sound.add('playerBones')
     }
 
-    public static getInstance(scene: Phaser.Scene, x: number, y: number): Player {
+    public static getInstance(scene: PlayScene, x: number, y: number): Player {
         if (!Player.instance) {
             Player.instance = new Player(scene, x, y)
         }

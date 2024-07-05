@@ -1,4 +1,5 @@
 import { ScoreManager } from '../manager'
+import { PlayScene } from '../scenes'
 import Player from './Player'
 
 class Coins extends Phaser.GameObjects.Container {
@@ -7,7 +8,7 @@ class Coins extends Phaser.GameObjects.Container {
     private scoreManager: ScoreManager
     private coinPickupSound: Phaser.Sound.BaseSound[]
     private currentSound = 0
-    constructor(scene: Phaser.Scene, x: number, y: number) {
+    constructor(scene: PlayScene, x: number, y: number) {
         super(scene, x, y)
         this.scene = scene
         this.coinMap = this.scene.make.tilemap({ key: 'coinShape' })

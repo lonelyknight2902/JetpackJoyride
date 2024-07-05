@@ -1,4 +1,3 @@
-import { LabMap, HallwayMap } from '../../maps'
 import { PlayScene } from '../../scenes'
 import State from '../../types/State'
 

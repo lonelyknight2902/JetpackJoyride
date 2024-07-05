@@ -13,10 +13,12 @@ class Pause extends Phaser.GameObjects.Container {
         this.continueButton = new Button(scene, 0, 0, 'Continue', () => {
             console.log('Continue')
             scene.stateMachine.transition('play')
+            scene.sound.play('UISelect')
         })
         this.homeButton = new Button(scene, 0, 100, 'Home', () => {
             console.log('Home')
             scene.stateMachine.transition('start')
+            scene.sound.play('UIBack')
         })
 
         this.add(this.pauseText)

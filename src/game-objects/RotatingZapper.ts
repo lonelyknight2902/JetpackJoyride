@@ -1,8 +1,9 @@
+import { PlayScene } from '../scenes'
 import Zapper from './Zapper'
 import SAT from 'sat'
 
 class RotatingZapper extends Zapper {
-    constructor(scene: Phaser.Scene, x: number, y: number) {
+    constructor(scene: PlayScene, x: number, y: number) {
         super(scene, x, y)
         this.zapper.rotation = Math.PI / 2
         this.orb1.setTexture('orb')

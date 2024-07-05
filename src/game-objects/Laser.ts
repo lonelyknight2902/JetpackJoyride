@@ -13,6 +13,7 @@ import {
     StopState,
 } from '../states/laser-states'
 import Player from './Player'
+import { PlayScene } from '../scenes'
 
 class Laser extends Phaser.GameObjects.Container {
     public laserPodLeft: Phaser.GameObjects.Sprite
@@ -29,7 +30,7 @@ class Laser extends Phaser.GameObjects.Container {
     public laserStartAudio: Phaser.Sound.BaseSound
     public laserFireAudio: Phaser.Sound.BaseSound
     public laserStopAudio: Phaser.Sound.BaseSound
-    constructor(scene: Phaser.Scene, x: number, y: number) {
+    constructor(scene: PlayScene, x: number, y: number) {
         super(scene, x, y)
         this.scene.add.existing(this)
         this.laserPodLeft = new LaserPod(scene, -100, 0)

@@ -238,6 +238,8 @@ class LoadingScene extends Phaser.Scene {
         this.load.audio('playerBones', 'assets/SFX/Barry/Player_bones.mp3')
 
         this.load.audio('jetpackFire', 'assets/SFX/Jetpack/jetpack_fireLP.mp3')
+        this.load.audio('UISelect', 'assets/SFX/UI/ui_select.mp3')
+        this.load.audio('UIBack', 'assets/SFX/UI/ui_back.mp3')
     }
 
     create() {

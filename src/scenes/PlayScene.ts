@@ -67,6 +67,8 @@ class PlayScene extends Phaser.Scene {
     create() {
         // const renderTexture = this.add.renderTexture(0, 0, 32, 32)
         // renderTexture.saveTexture('player')
+        this.sound.add('UISelect')
+        this.sound.add('UIBack')
         this.scoreManager = ScoreManager.getInstance()
         this.map = this.add.container(0, 0)
         this.titleMap = new TitleMap(this, 0, 0)
