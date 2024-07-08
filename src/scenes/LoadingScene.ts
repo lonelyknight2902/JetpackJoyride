@@ -118,6 +118,12 @@ class LoadingScene extends Phaser.Scene {
             'assets/atlas/hallway_assets.json'
         )
 
+        this.load.atlas(
+            'warehouse',
+            'assets/atlas/warehouse_assets.png',
+            'assets/atlas/warehouse_assets.json'
+        )
+
         this.load.image('bullet', 'assets/Characters/Effects/effect_smgbullet.png')
         this.load.image('shell', 'assets/Characters/Effects/effect_rocketmgshell_TVOS.png')
         this.load.image('dust', 'assets/particles/dust.png')

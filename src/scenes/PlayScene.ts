@@ -1,7 +1,7 @@
 import { LOWER_BOUND, SCREEN_HEIGHT, SCREEN_WIDTH, UPPER_BOUND } from '../constants'
 import { LasersContainer, Missile, MissilesContainer, Player, Title } from '../game-objects'
 import { ScoreManager } from '../manager'
-import { HallwayMap, LabMap, RoomMap, TitleMap } from '../maps'
+import { HallwayMap, LabMap, RoomMap, TitleMap, Warehouse } from '../maps'
 import { ZapperPool } from '../object-pools'
 import { StateMachine } from '../states'
 import {
@@ -79,6 +79,7 @@ class PlayScene extends Phaser.Scene {
             928 + (hallwayMap.width - 32 * 6 + labmap.width) - 32 * 6,
             0
         )
+        const warehouseMap = new Warehouse(this, roomMap.x + roomMap.width - 32 * 6, 0)
         console.log(hallwayMap.width)
         console.log(labmap.width)
         console.log(this.titleMap.width)
@@ -86,10 +87,12 @@ class PlayScene extends Phaser.Scene {
         this.map.add(hallwayMap)
         this.map.add(labmap)
         this.map.add(roomMap)
+        this.map.add(warehouseMap)
         this.map.sendToBack(hallwayMap)
         this.map.sendToBack(labmap)
         this.map.sendToBack(roomMap)
-        this.initialMapList = [this.titleMap, hallwayMap, labmap, roomMap]
+        this.map.sendToBack(warehouseMap)
+        this.initialMapList = [this.titleMap, hallwayMap, labmap, roomMap, warehouseMap]
         this.title = new Title(this, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
         this.title.setScale(0.8)
         this.touchText = this.add.bitmapText(

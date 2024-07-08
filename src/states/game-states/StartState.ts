@@ -36,6 +36,7 @@ class StartState extends State {
         map.add(mapList[0])
         map.sendToBack(mapList[1])
         map.sendToBack(mapList[2])
+        map.sendToBack(mapList[3])
         mapList.forEach((map) => map.update())
         this.scene.title.y = SCREEN_HEIGHT / 2
         this.scene.getPlayer().setPosition(200, 576)
